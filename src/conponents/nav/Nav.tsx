@@ -1,9 +1,10 @@
-import { NavContainer, Ul } from "./style";
+import { NavContainer, Ul, Logo } from "./style";
 import { Link } from "react-router-dom";
 
 export default function Nav() {
   return (
     <NavContainer>
+      <Logo>MUSIC SPACE</Logo>
       <Ul>
         <li>
           <Link to="/">홈</Link>

@@ -6,6 +6,7 @@ import "./App.css";
 import { Main } from "./App.style";
 import Search from "./pages/search/Search";
 import PlayList from "./pages/playList/PlayList";
+import ProdCard from "./pages/prodCard/ProdCard";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="search" element={<Search />} />
           <Route path="playList" element={<PlayList />} />
+          <Route path="prod" element={<ProdCard />} />
         </Routes>
       </Main>
     </>

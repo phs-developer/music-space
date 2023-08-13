@@ -1,4 +1,4 @@
-import ProdCard from "../../conponents/prodCard/ProdCard";
+import ProdCard from "../../conponents/prodItem/ProdItem";
 import { Section, Input, SearchList } from "./style";
 
 export default function Search() {
@@ -6,14 +6,14 @@ export default function Search() {
     <Section>
       <Input type="text" placeholder="가수명 입력" />
       <SearchList>
-        <ProdCard size="small" />
-        <ProdCard size="small" />
-        <ProdCard size="small" />
-        <ProdCard size="small" />
-        <ProdCard size="small" />
-        <ProdCard size="small" />
-        <ProdCard size="small" />
-        <ProdCard size="small" />
+        <ProdCard option="small" />
+        <ProdCard option="small" />
+        <ProdCard option="small" />
+        <ProdCard option="small" />
+        <ProdCard option="small" />
+        <ProdCard option="small" />
+        <ProdCard option="small" />
+        <ProdCard option="small" />
       </SearchList>
     </Section>
   );

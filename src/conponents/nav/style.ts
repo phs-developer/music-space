@@ -4,14 +4,20 @@ const NavContainer = styled.nav`
   color: white;
   width: 15vw;
   height: 100vh;
-  padding: 50px 15px;
-  background: rgba(0, 0, 0, 0.9);
+  padding: 40px 15px;
+  background: rgba(0, 0, 0);
+`;
+
+const Logo = styled.h1`
+  font-weight: 800;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
 `;
 
 const Ul = styled.ul`
-  min-height: 100%;
+  height: 95%;
   font-size: 1.2rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: #242424;
   border-radius: 10px;
   li {
     padding: 20px;
@@ -21,4 +27,4 @@ const Ul = styled.ul`
   }
 `;
 
-export { NavContainer, Ul };
+export { NavContainer, Ul, Logo };

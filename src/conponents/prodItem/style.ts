@@ -2,13 +2,9 @@ import styled from "styled-components";
 
 const ProdBox = styled.div`
   display: flex;
-  width: 200px;
+  max-width: 200px;
   flex-direction: column;
-  justify-content: center;
-  .small {
-    max-width: 230px;
-    max-height: 230px;
-  }
+  cursor: pointer;
   .playlist {
     max-width: 100px;
     max-height: 100px;
@@ -16,14 +12,20 @@ const ProdBox = styled.div`
 `;
 
 const ProdImg = styled.img`
-  width: 280px;
-  height: 280px;
-  background: gray;
+  width: 200px;
+  height: 200px;
 `;
 
 const ProdInfo = styled.div`
-  p {
-    padding: 5px 0px 0px 5px;
+  margin-top: 10px;
+  .name {
+    font-weight: 800;
+  }
+  .description {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    line-height: 16px;
+    color: gray;
   }
 `;
 

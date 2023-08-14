@@ -1,16 +1,30 @@
 import { ProdBox, ProdImg, ProdInfo } from "./style";
 
-export default function ProdItem({ option }: { option?: string }) {
+interface Data {
+  option?: string;
+  imgURL: string;
+  name: string;
+  description: string;
+  id: string;
+}
+
+export default function ProdItem({
+  option,
+  imgURL,
+  name,
+  description,
+  id,
+}: Data) {
   function prodPage() {
     // 페이지 이동
   }
 
   return (
     <ProdBox onClick={prodPage}>
-      <ProdImg src="" alt="prodImg" className={option} />
+      <ProdImg src={imgURL} alt="prodImg" />
       <ProdInfo className="prodInfo">
-        <p>title</p>
-        <p>singer</p>
+        <p className="name">{name}</p>
+        <p className="description">{description}</p>
       </ProdInfo>
     </ProdBox>
   );

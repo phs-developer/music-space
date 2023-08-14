@@ -11,9 +11,7 @@ export default function PlayList() {
         </CoverImg>
         {/* 플레이 리스트 */}
         <List>
-          <li>
-            <ProdItem option="playlist"></ProdItem>
-          </li>
+          <li>{/* <ProdItem option="playlist"></ProdItem> */}</li>
         </List>
       </div>
     </Section>

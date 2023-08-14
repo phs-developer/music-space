@@ -1,38 +1,51 @@
-import { useEffect } from "react";
 import ProdItem from "../../conponents/prodItem/ProdItem";
-import { Section, Top3, Best } from "./style";
-import axios from "axios";
+import { Section, Category } from "./style";
+import { useFetch, useFetch2 } from "../../hooks/useFetch";
 
 export default function Home() {
-  useEffect(() => {
-    async function connect() {
-      const res = await axios.get("http://localhost:8080");
-      console.log(res.data);
-    }
-    connect();
-  }, []);
+  const topLists = useFetch(
+    "https://api.spotify.com/v1/browse/categories/toplists/playlists?limit=5"
+  );
+  const popLists = useFetch(
+    "https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFEC4WFtoNRpw/playlists?limit=5"
+  );
 
   return (
     <Section>
-      <Top3>
-        <h2>TOP3</h2>
+      <Category>
+        <h2>TOP</h2>
         <div>
-          <ProdItem />
-          <ProdItem />
-          <ProdItem />
+          {topLists &&
+            topLists.map((item) => {
+              return (
+                <ProdItem
+                  key={item.id}
+                  imgURL={item.images[0].url}
+                  name={item.name}
+                  description={item.description}
+                  id={item.id}
+                />
+              );
+            })}
         </div>
-      </Top3>
-      <Best>
+      </Category>
+      <Category>
         <h2>Best</h2>
         <div className="hiddenContainer">
-          <ProdItem />
-          <ProdItem />
-          <ProdItem />
-          <ProdItem />
-          <ProdItem />
-          <ProdItem />
+          {popLists &&
+            popLists.map((item) => {
+              return (
+                <ProdItem
+                  key={item.id}
+                  imgURL={item.images[0].url}
+                  name={item.name}
+                  description={item.description}
+                  id={item.id}
+                />
+              );
+            })}
         </div>
-      </Best>
+      </Category>
     </Section>
   );
 }

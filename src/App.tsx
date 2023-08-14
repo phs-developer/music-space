@@ -7,8 +7,21 @@ import { Main } from "./App.style";
 import Search from "./pages/search/Search";
 import PlayList from "./pages/playList/PlayList";
 import ProdCard from "./pages/prodCard/ProdCard";
+import { useEffect } from "react";
+import axios from "axios";
 
 function App() {
+  useEffect(() => {
+    (async function () {
+      const token = sessionStorage.getItem("token");
+      // 새로고침 시 토큰 재발급 방지
+      if (!token) {
+        const res = await axios.get("http://localhost:8080");
+        sessionStorage.setItem("token", res.data.access_token);
+      }
+    })();
+  }, []);
+
   return (
     <>
       <GlobalStyles />

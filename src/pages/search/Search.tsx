@@ -6,14 +6,14 @@ export default function Search() {
     <Section>
       <Input type="text" placeholder="가수명 입력" />
       <SearchList>
+        {/* <ProdCard option="small" />
         <ProdCard option="small" />
         <ProdCard option="small" />
         <ProdCard option="small" />
         <ProdCard option="small" />
         <ProdCard option="small" />
         <ProdCard option="small" />
-        <ProdCard option="small" />
-        <ProdCard option="small" />
+        <ProdCard option="small" /> */}
       </SearchList>
     </Section>
   );

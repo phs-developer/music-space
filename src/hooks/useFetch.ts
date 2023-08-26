@@ -9,8 +9,15 @@ interface TopListsProps {
   description: string;
   id: string;
 }
+interface SearchProps {
+  images: {
+    url: string;
+  }[];
+  name: string;
+  id: string;
+}
 
-interface TopData {
+interface CategoryData {
   data: {
     playlists: {
       items: {
@@ -24,41 +31,63 @@ interface TopData {
     };
   };
 }
+interface tracksData {
+  data: {
+    albums: {
+      items: {
+        images: {
+          url: string;
+        }[];
+        name: string;
+        id: string;
+      }[];
+    };
+  };
+}
 
-function useFetch(url: string) {
-  const [data, setData] = useState<Array<TopListsProps> | null>(null);
-  const token = sessionStorage.getItem("token");
+function useCategoryFetch(url: string) {
+  const [list, setList] = useState<Array<TopListsProps> | []>([]);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     (async function () {
-      const topData: TopData = await axios(url, {
+      const data: CategoryData = await axios(url, {
         headers: {
           Authorization: "Bearer " + token,
         },
       });
-      console.log(topData);
-      setData(topData.data.playlists.items);
+      setList(data.data.playlists.items);
     })();
   }, [url, token]);
-  return data;
+
+  return list;
 }
 
-function useFetch2(url: string) {
-  const [data, setData] = useState<Array<TopListsProps> | null>(null);
-  const token = sessionStorage.getItem("token");
+function useSearchFetch(url: string) {
+  const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    (async function () {
-      const topData = await axios(url, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      console.log(topData);
-      return topData;
-    })();
-  }, [url, token]);
-  // return data;
+  (async function () {
+    const data: tracksData = await axios(url, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    const items = data.data.albums.items;
+    console.log(items[0]);
+    return items[0] ? ["1"] : items;
+  })();
+  // useEffect(() => {
+  //   (async function () {
+  //     const data: tracksData = await axios(url, {
+  //       headers: {
+  //         Authorization: "Bearer " + token,
+  //       },
+  //     });
+  //     console.log(data);
+  //     setList(data.data.albums.items);
+  //   })();
+  // }, [url, token]);
+  // return list;
 }
 
-export { useFetch, useFetch2 };
+export { useCategoryFetch, useSearchFetch };

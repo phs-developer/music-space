@@ -4,14 +4,15 @@ const NavContainer = styled.nav`
   color: white;
   width: 15vw;
   height: 100vh;
-  padding: 40px 15px;
+  padding: 10px 15px;
   background: rgba(0, 0, 0);
 `;
 
 const Logo = styled.h1`
   font-weight: 800;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  margin: 1.5rem 0px;
+  text-align: center;
 `;
 
 const Ul = styled.ul`

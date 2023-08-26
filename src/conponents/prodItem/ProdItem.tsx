@@ -1,21 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import { ProdBox, ProdImg, ProdInfo } from "./style";
 
 interface Data {
-  option?: string;
   imgURL: string;
   name: string;
   description: string;
   id: string;
 }
 
-export default function ProdItem({
-  option,
-  imgURL,
-  name,
-  description,
-  id,
-}: Data) {
+export default function ProdItem({ imgURL, name, description, id }: Data) {
+  let navigate = useNavigate();
+
   function prodPage() {
+    sessionStorage.setItem("id", id);
+    navigate("/card");
     // 페이지 이동
   }
 

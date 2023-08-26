@@ -8,8 +8,8 @@ const Section = styled.section`
 const Input = styled.input`
   padding: 8px;
   padding-left: 15px;
-  width: 300px;
-  border: 1px solid black;
+  width: 500px;
+  border: 1px solid #86e57f;
   border-radius: 50px;
 `;
 

@@ -13,11 +13,11 @@ import axios from "axios";
 function App() {
   useEffect(() => {
     (async function () {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       // 새로고침 시 토큰 재발급 방지
       if (!token) {
         const res = await axios.get("http://localhost:8080");
-        sessionStorage.setItem("token", res.data.access_token);
+        localStorage.setItem("token", res.data.access_token);
       }
     })();
   }, []);
@@ -31,7 +31,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="search" element={<Search />} />
           <Route path="playList" element={<PlayList />} />
-          <Route path="prod" element={<ProdCard />} />
+          <Route path="card" element={<ProdCard />} />
         </Routes>
       </Main>
     </>

@@ -1,7 +1,26 @@
 import styled from "styled-components";
 import { AlbumBox, AlbumInfo, Btn } from "./style";
+import axios from "axios";
 
 export default function ProdCard() {
+  const id = sessionStorage.getItem("id");
+
+  // const data = useFetch2(`https://api.spotify.com/v1/tracks/${id}`);
+
+  (async function () {
+    const topData = await axios(
+      "https://api.spotify.com/v1/tracks/37i9dQZF1DXcF6B6QPhFDv",
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            "BQCtMCwciT8S3JuAw8kcbTXpuqw5_wsB7Smm67BR-s3TOr9M_c24MdZIWBwPzc4D63qPJp0v8hgCuHT9N4CcW6GmmM5Sd90bgw16mNJEx2dL4lq71ag",
+        },
+      }
+    );
+    console.log(topData);
+  })();
+
   return (
     <Section>
       <AlbumBox>

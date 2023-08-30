@@ -16,7 +16,7 @@ const Logo = styled.h1`
 `;
 
 const Ul = styled.ul`
-  height: 95%;
+  height: 90%;
   font-size: 1.2rem;
   background: #242424;
   border-radius: 10px;

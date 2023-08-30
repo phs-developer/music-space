@@ -1,6 +1,7 @@
 import ProdItem from "../../conponents/prodItem/ProdItem";
 import { Section, Container } from "./style";
 import { useCategoryFetch } from "../../hooks/useFetch";
+import axios from "axios";
 
 interface TopListsProps {
   images: {
@@ -18,6 +19,19 @@ export default function Home() {
   const popLists = useCategoryFetch(
     "https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFEC4WFtoNRpw/playlists?limit=5"
   );
+
+  (async function () {
+    const token = localStorage.getItem("token");
+    const res = await axios(
+      "https://api.spotify.com/v1/browse/categories/toplists/playlists",
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    console.log(res);
+  })();
 
   function Category({
     category,

@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
+interface BtnType {
+  onClick: () => void;
+}
+
 const Container = styled.div`
-  position: "relative";
+  position: relative;
   > div {
     position: absolute;
     width: 100%;
@@ -24,13 +28,11 @@ const Section = styled.section`
   }
   .listBox {
     display: flex;
-    justify-content: center;
-    column-gap: 50px;
+    justify-content: space-between;
+    column-gap: 3rem;
     height: 90%;
-    padding: 100px 50px;
-    > div {
-      width: 50%;
-    }
+    margin: 80px 100px 0px 100px;
+    border-radius: 10px;
   }
 `;
 
@@ -40,8 +42,8 @@ const CurrentItem = styled.div`
   row-gap: 20px;
   font-size: 1.2rem;
   img {
-    width: 500px;
-    height: 500px;
+    width: 700px;
+    height: 700px;
   }
   span {
     display: flex;
@@ -62,23 +64,44 @@ const CurrentItem = styled.div`
 `;
 
 const List = styled.ul`
+  width: 700px;
   display: flex;
   flex-direction: column;
-  width: 50%;
-  border: 1px solid black;
-  padding: 1rem;
-  li {
+  padding: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.2);
+`;
+
+const ListItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  div {
     display: flex;
-    column-gap: 10px;
     align-items: flex-end;
-    margin-bottom: 10px;
     img {
       width: 70px;
+      margin-right: 10px;
     }
     span {
+      color: red;
       margin-bottom: 10px;
     }
   }
 `;
+const Btn = styled.button<BtnType>`
+  background-color: green;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  align-self: center;
+  img {
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+  }
+`;
 
-export { Container, Section, CurrentItem, List };
+export { Container, Section, CurrentItem, List, ListItem, Btn };

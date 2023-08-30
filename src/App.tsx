@@ -5,7 +5,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import "./App.css";
 import { Main } from "./App.style";
 import Search from "./pages/search/Search";
-import PlayList from "./pages/playList/PlayList";
+import { PlayList } from "./pages/playList/PlayList";
 import ProdCard from "./pages/prodCard/ProdCard";
 import { useEffect } from "react";
 import axios from "axios";

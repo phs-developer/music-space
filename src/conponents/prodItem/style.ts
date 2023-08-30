@@ -5,6 +5,15 @@ const ProdBox = styled.div`
   max-width: 200px;
   flex-direction: column;
   cursor: pointer;
+  position: relative;
+  &: hover {
+    > .hoverAction {
+      display: flex;
+    }
+    > img {
+      filter: blur(1px);
+    }
+  }
   .playlist {
     max-width: 100px;
     max-height: 100px;
@@ -29,4 +38,19 @@ const ProdInfo = styled.div`
   }
 `;
 
-export { ProdBox, ProdImg, ProdInfo };
+const AddBtn = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  > img {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 50px;
+  }
+`;
+
+export { ProdBox, ProdImg, ProdInfo, AddBtn };

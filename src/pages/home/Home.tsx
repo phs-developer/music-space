@@ -1,70 +1,70 @@
 import ProdItem from "../../conponents/prodItem/ProdItem";
 import { Section, Container } from "./style";
-import { useCategoryFetch } from "../../hooks/useFetch";
-import axios from "axios";
+import { useCategoryListFetch } from "../../hooks/useFetch";
 
-interface TopListsProps {
-  images: {
-    url: string;
+// 인기 리스트 : toplists "37i9dQZF1DXcBWIGoYBM5M"
+// 팝 : "0JQ5DAqbMKFEC4WFtoNRpw" "37i9dQZF1DWVuUd3Ffrcx8"
+// 힙합 : "0JQ5DAqbMKFQ00XGBls6ym"
+// 운동 : "0JQ5DAqbMKFAXlCG6QvYQ4"
+// 드라이빙 : "0JQ5DAqbMKFIRybaNTYXXy"
+// 알앤비 : "0JQ5DAqbMKFEZPnFQSFB1T"
+// 어쿠스틱 : "0JQ5DAqbMKFy78wprEpAjl"
+interface Item {
+  album: {
+    images: {
+      url: string;
+    }[];
+  };
+  artists: {
+    name: string;
   }[];
-  name: string;
-  description: string;
   id: string;
+  name: string;
 }
-
 export default function Home() {
-  const topLists = useCategoryFetch(
-    "https://api.spotify.com/v1/browse/categories/toplists/playlists?limit=5"
-  );
-  const popLists = useCategoryFetch(
-    "https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFEC4WFtoNRpw/playlists?limit=5"
-  );
-
-  (async function () {
-    const token = localStorage.getItem("token");
-    const res = await axios(
-      "https://api.spotify.com/v1/browse/categories/toplists/playlists",
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
-    console.log(res);
-  })();
-
-  function Category({
-    category,
-    title,
-  }: {
-    category: Array<TopListsProps> | null;
-    title: string;
-  }) {
-    return (
-      <Container>
-        <h2>{title}</h2>
-        <div>
-          {category &&
-            category.map((item) => {
-              return (
-                <ProdItem
-                  key={item.id}
-                  imgURL={item.images[0].url}
-                  name={item.name}
-                  description={item.description}
-                  id={item.id}
-                />
-              );
-            })}
-        </div>
-      </Container>
-    );
-  }
+  const pop = useCategoryListFetch("37i9dQZF1DWVuUd3Ffrcx8");
+  const top = useCategoryListFetch("37i9dQZF1DXcBWIGoYBM5M");
+  const hippop = useCategoryListFetch("37i9dQZF1DWW46Vfs1oltB");
+  const workOut = useCategoryListFetch("37i9dQZF1DX3ZeFHRhhi7Y");
+  const driving = useCategoryListFetch("37i9dQZF1DWWMOmoXKqHTD");
+  const rnb = useCategoryListFetch("37i9dQZF1DX4SBhb3fqCJd");
 
   return (
     <Section>
-      <Category category={topLists} title="TOP" />
-      <Category category={popLists} title="POP" />
+      <Category category={pop} title="TOP" />
+      <Category category={top} title="POP" />
+      <Category category={hippop} title="HIP-POP" />
+      <Category category={workOut} title="WORK-OUT" />
+      <Category category={driving} title="DRIVING" />
+      <Category category={rnb} title="R&B" />
     </Section>
+  );
+}
+
+function Category({
+  category,
+  title,
+}: {
+  category: Array<Item> | null;
+  title: string;
+}) {
+  return (
+    <Container>
+      <h2>{title}</h2>
+      <div>
+        {category &&
+          category.map((item) => {
+            return (
+              <ProdItem
+                key={item.id}
+                imgURL={item.album.images[0].url}
+                trackName={item.name}
+                name={item.artists[0].name}
+                id={item.id}
+              />
+            );
+          })}
+      </div>
+    </Container>
   );
 }

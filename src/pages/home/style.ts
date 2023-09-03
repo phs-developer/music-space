@@ -3,32 +3,26 @@ import styled from "styled-components";
 const Section = styled.section`
   width: 85vw;
   padding: 50px;
-  > div {
-    position: relative;
-  }
-  > div::before {
-    content: "";
-    position: absolute;
-    background-color: black;
-    width: 100%;
-    height: 1px;
-    top: -30px;
-  }
-  > div:first-child::before {
-    display: none;
-  }
+  overflow: scroll;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 5rem;
+  column-gap: 3rem;
 `;
 
 const Container = styled.div`
-  margin-bottom: 80px;
+  width: 80%;
   h2 {
     font-size: 1.7rem;
     font-weight: 800;
+    margin-bottom: 2rem;
   }
   > div {
-    display: flex;
-    column-gap: 30px;
-    padding-top: 15px;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 `;
 

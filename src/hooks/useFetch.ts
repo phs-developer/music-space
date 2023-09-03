@@ -45,9 +45,10 @@ interface tracksData {
   };
 }
 
+const token = localStorage.getItem("token");
+
 function useCategoryFetch(url: string) {
   const [list, setList] = useState<Array<TopListsProps> | []>([]);
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     (async function () {
@@ -64,8 +65,6 @@ function useCategoryFetch(url: string) {
 }
 
 function useSearchFetch(url: string) {
-  const token = localStorage.getItem("token");
-
   (async function () {
     const data: tracksData = await axios(url, {
       headers: {
@@ -73,21 +72,43 @@ function useSearchFetch(url: string) {
       },
     });
     const items = data.data.albums.items;
-    console.log(items[0]);
     return items[0] ? ["1"] : items;
   })();
-  // useEffect(() => {
-  //   (async function () {
-  //     const data: tracksData = await axios(url, {
-  //       headers: {
-  //         Authorization: "Bearer " + token,
-  //       },
-  //     });
-  //     console.log(data);
-  //     setList(data.data.albums.items);
-  //   })();
-  // }, [url, token]);
-  // return list;
 }
 
-export { useCategoryFetch, useSearchFetch };
+interface Item {
+  album: {
+    images: {
+      url: string;
+    }[];
+  };
+  artists: {
+    name: string;
+  }[];
+  id: string;
+  name: string;
+}
+
+function useCategoryListFetch(listID: string) {
+  const [list, setList] = useState<Array<Item> | []>([]);
+  useEffect(() => {
+    (async function () {
+      let items = [];
+      const res = await axios(
+        `https://api.spotify.com/v1/playlists/${listID}`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      for (let i = 0; i < 4; i++) {
+        items.push(res.data.tracks.items[i].track);
+      }
+      setList(items);
+    })();
+  }, [listID]);
+  return list;
+}
+
+export { useCategoryFetch, useSearchFetch, useCategoryListFetch };

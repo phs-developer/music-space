@@ -5,8 +5,8 @@ export default function SpotifyBtn({ uri }: { uri: string }) {
   return <Button to={uri}>SPOTIFY</Button>;
 }
 const Button = styled(Link)`
-  padding: 7px;
-  background: #1ed760;
+  padding: 0.5rem 1rem;
+  background: #560957;
   border-radius: 100px;
   font-weight: bold;
   letter-spacing: 1px;

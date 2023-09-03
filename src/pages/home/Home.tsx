@@ -21,7 +21,12 @@ interface Item {
   id: string;
   name: string;
 }
-export default function Home() {
+
+interface Props {
+  addPlaylist: (id: string, img: string, title: string) => void;
+}
+
+export default function Home({ addPlaylist }: Props) {
   const pop = useCategoryListFetch("37i9dQZF1DWVuUd3Ffrcx8");
   const top = useCategoryListFetch("37i9dQZF1DXcBWIGoYBM5M");
   const hippop = useCategoryListFetch("37i9dQZF1DWW46Vfs1oltB");
@@ -31,12 +36,15 @@ export default function Home() {
 
   return (
     <Section>
-      <Category category={pop} title="TOP" />
-      <Category category={top} title="POP" />
-      <Category category={hippop} title="HIP-POP" />
-      <Category category={workOut} title="WORK-OUT" />
-      <Category category={driving} title="DRIVING" />
-      <Category category={rnb} title="R&B" />
+      <h1>Welcome, Your Music Space!</h1>
+      <div>
+        <Category category={pop} title="TOP" addPlaylist={addPlaylist} />
+        {/* <Category category={top} title="POP" />
+        <Category category={hippop} title="HIP-POP" />
+        <Category category={workOut} title="WORK-OUT" />
+        <Category category={driving} title="DRIVING" />
+        <Category category={rnb} title="R&B" /> */}
+      </div>
     </Section>
   );
 }
@@ -44,9 +52,11 @@ export default function Home() {
 function Category({
   category,
   title,
+  addPlaylist,
 }: {
   category: Array<Item> | null;
   title: string;
+  addPlaylist: (id: string, imgURL: string, name: string) => void;
 }) {
   return (
     <Container>
@@ -56,6 +66,7 @@ function Category({
           category.map((item) => {
             return (
               <ProdItem
+                addPlaylist={addPlaylist}
                 key={item.id}
                 imgURL={item.album.images[0].url}
                 trackName={item.name}

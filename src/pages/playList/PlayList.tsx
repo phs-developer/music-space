@@ -24,9 +24,14 @@ export interface ListProps {
   imgUrl: string;
   title: string;
 }
+interface listType {
+  id: string;
+  imgUrl: string;
+  title: string;
+}
 
 // 트랙의 spotify ID가 있는 리스트를 props로 받아와야 함. (=전역 상태 관리, 장바구니 역할)
-export function PlayList() {
+export function PlayList({ list }: { list: Array<listType> | [] }) {
   const items: Array<ListProps> = [
     {
       id: "3UUTUsYZAAAkcWgkoxHvcu",
@@ -42,12 +47,6 @@ export function PlayList() {
     },
     {
       id: "1BaoPBo6zT6sOAc0pHIIj1",
-      imgUrl:
-        "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
-      title: "Cut To The Feeling",
-    },
-    {
-      id: "37i9dQZF1DWTdBIyTaKDBw",
       imgUrl:
         "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
       title: "Cut To The Feeling",
@@ -75,18 +74,14 @@ export function PlayList() {
   return (
     <>
       {currentItem && (
-        <Container>
-          <div
-            style={{
-              backgroundImage: `url(${currentItem.album.images[0].url})`,
-            }}
-          />
+        <Container background={currentItem.album.images[0].url}>
+          <div className="bg" />
           <Section>
-            <h2>뮤직 라이브러리</h2>
+            <h2>Playlist</h2>
             <div className="listBox">
-              <CurrentPlay item={currentItem} />
+              <Play item={currentItem} />
               <List>
-                {items.map((item) => {
+                {list.map((item) => {
                   return (
                     <ListItem>
                       <div>
@@ -111,7 +106,7 @@ export function PlayList() {
   );
 }
 
-function CurrentPlay({ item }: { item: CurrentProps }) {
+function Play({ item }: { item: CurrentProps }) {
   return (
     <CurrentItem>
       <img src={item.album.images[0].url} alt="이미지" />

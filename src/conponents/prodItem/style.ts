@@ -27,10 +27,14 @@ const ProdImg = styled.img`
 
 const ProdInfo = styled.div`
   margin-top: 10px;
-  .name {
+  .trackName {
     font-weight: 800;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 1rem;
   }
-  .description {
+  .name {
     margin-top: 5px;
     font-size: 0.8rem;
     line-height: 16px;

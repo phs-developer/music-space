@@ -7,8 +7,14 @@ import { Main } from "./App.style";
 import Search from "./pages/search/Search";
 import { PlayList } from "./pages/playList/PlayList";
 import ProdCard from "./pages/prodCard/ProdCard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+
+interface listType {
+  id: string;
+  imgUrl: string;
+  title: string;
+}
 
 function App() {
   useEffect(() => {
@@ -22,15 +28,27 @@ function App() {
     })();
   }, []);
 
+  const [playlist, setPlaylist] = useState<Array<listType> | []>([]);
+
+  function addPlaylist(id: string, img: string, title: string) {
+    const newItem: listType = {
+      id: id,
+      imgUrl: img,
+      title: title,
+    };
+    setPlaylist([newItem, ...playlist]);
+    console.log(playlist);
+  }
+
   return (
     <>
       <GlobalStyles />
       <Main>
         <Nav />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home addPlaylist={addPlaylist} />} />
           <Route path="search" element={<Search />} />
-          <Route path="playList" element={<PlayList />} />
+          <Route path="playList" element={<PlayList list={playlist} />} />
           <Route path="card" element={<ProdCard />} />
         </Routes>
       </Main>

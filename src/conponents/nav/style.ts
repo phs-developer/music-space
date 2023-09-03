@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
 
 const NavContainer = styled.nav`
-  color: white;
   width: 15vw;
   height: 100vh;
   padding: 10px 15px;
-  background: rgba(0, 0, 0);
+  background: rgba(136, 182, 253);
+  border-radius: 5px;
 `;
 
 const Logo = styled.h1`
@@ -18,12 +18,12 @@ const Logo = styled.h1`
 const Ul = styled.ul`
   height: 90%;
   font-size: 1.2rem;
-  background: #242424;
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
   li {
     padding: 20px;
     &:hover {
-      font-weight: 600;
+      font-weight: 800;
     }
   }
 `;

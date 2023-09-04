@@ -1,17 +1,12 @@
 import { styled } from "styled-components";
 
-export const Main = styled.div`
+export const Main = styled.div<{ background: string }>`
   display: flex;
-  background: linear-gradient(
-    to bottom right,
-    white,
-    rgb(189, 214, 252),
-    80%,
-    rgb(231, 168, 261)
-  );
+  background-image: url(${(props) => props.background});
+  background-size: cover;
   background-size: 200%;
   z-index: -10;
-  animation: gradient 5s infinite;
+  animation: gradient 8s infinite;
   @keyframes gradient {
     50% {
       background-position: 100% 50%;

@@ -21,8 +21,8 @@ const ProdBox = styled.div`
 `;
 
 const ProdImg = styled.img`
-  width: 200px;
-  height: 200px;
+  max-width: 100%;
+  height: auto;
 `;
 
 const ProdInfo = styled.div`

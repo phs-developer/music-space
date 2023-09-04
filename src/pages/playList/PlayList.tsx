@@ -32,28 +32,8 @@ interface listType {
 
 // 트랙의 spotify ID가 있는 리스트를 props로 받아와야 함. (=전역 상태 관리, 장바구니 역할)
 export function PlayList({ list }: { list: Array<listType> | [] }) {
-  const items: Array<ListProps> = [
-    {
-      id: "3UUTUsYZAAAkcWgkoxHvcu",
-      imgUrl:
-        "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
-      title: "Cut To The Feeling",
-    },
-    {
-      id: "11dFghVXANMlKmJXsNCbNl",
-      imgUrl:
-        "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
-      title: "Cut To The Feeling",
-    },
-    {
-      id: "1BaoPBo6zT6sOAc0pHIIj1",
-      imgUrl:
-        "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
-      title: "Cut To The Feeling",
-    },
-  ];
   const [currentItem, setCurrentItem] = useState<CurrentProps>();
-  const [id, setId] = useState(items[0].id);
+  const [id, setId] = useState(list[0].id);
 
   useEffect(() => {
     const token = localStorage.getItem("token");

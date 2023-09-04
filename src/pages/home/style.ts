@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Section = styled.section`
   width: 85vw;
-  padding: 50px;
+  padding: 50px 5%;
   overflow: auto;
   height: 100vh;
   > h1 {
@@ -13,13 +13,15 @@ const Section = styled.section`
   > div {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    row-gap: 5rem;
-    column-gap: 3rem;
+    gap: 3rem;
   }
 `;
 
 const Container = styled.div`
-  width: 80%;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  padding: 2rem;
+  width: 100%;
   h2 {
     font-size: 1.7rem;
     font-weight: 800;
@@ -27,9 +29,10 @@ const Container = styled.div`
   }
   > div {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+    justify-items: center;
+    }
   }
 `;
 

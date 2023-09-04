@@ -6,11 +6,12 @@ const Section = styled.section`
 `;
 
 const Input = styled.input`
-  padding: 8px;
-  padding-left: 15px;
+  padding: 0.8rem 1.5rem;
   width: 500px;
-  border: 1px solid #86e57f;
+  border: none;
   border-radius: 50px;
+  font-family: "Noto Sans KR";
+  font-size: 1rem;
 `;
 
 const SearchList = styled.div`

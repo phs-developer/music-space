@@ -29,7 +29,11 @@ interface listType {
   name: string;
 }
 
-export default function Search() {
+interface Props {
+  addPlaylist: (id: string, img: string, title: string) => void;
+}
+
+export default function Search({ addPlaylist }: Props) {
   const [value, setValue] = useState<string>("");
   const [list, setList] = useState<Array<listType> | []>([]);
 
@@ -71,6 +75,7 @@ export default function Search() {
         {list?.map((e) => {
           return (
             <ProdItem
+              addPlaylist={addPlaylist}
               key={e.id}
               id={e.id}
               imgURL={e.album.images[0].url}

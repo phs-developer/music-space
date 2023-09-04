@@ -9,6 +9,7 @@ import { PlayList } from "./pages/playList/PlayList";
 import ProdCard from "./pages/prodCard/ProdCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import bg from "./assets/bg.jpg";
 
 interface listType {
   id: string;
@@ -43,11 +44,11 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Main>
+      <Main background={bg}>
         <Nav />
         <Routes>
           <Route path="/" element={<Home addPlaylist={addPlaylist} />} />
-          <Route path="search" element={<Search />} />
+          <Route path="search" element={<Search addPlaylist={addPlaylist} />} />
           <Route path="playList" element={<PlayList list={playlist} />} />
           <Route path="card" element={<ProdCard />} />
         </Routes>

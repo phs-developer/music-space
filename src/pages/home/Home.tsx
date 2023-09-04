@@ -39,11 +39,19 @@ export default function Home({ addPlaylist }: Props) {
       <h1>Welcome, Your Music Space!</h1>
       <div>
         <Category category={pop} title="TOP" addPlaylist={addPlaylist} />
-        {/* <Category category={top} title="POP" />
-        <Category category={hippop} title="HIP-POP" />
-        <Category category={workOut} title="WORK-OUT" />
-        <Category category={driving} title="DRIVING" />
-        <Category category={rnb} title="R&B" /> */}
+        <Category category={top} title="POP" addPlaylist={addPlaylist} />
+        <Category category={hippop} title="HIP-POP" addPlaylist={addPlaylist} />
+        <Category
+          category={workOut}
+          title="WORK-OUT"
+          addPlaylist={addPlaylist}
+        />
+        <Category
+          category={driving}
+          title="DRIVING"
+          addPlaylist={addPlaylist}
+        />
+        <Category category={rnb} title="R&B" addPlaylist={addPlaylist} />
       </div>
     </Section>
   );

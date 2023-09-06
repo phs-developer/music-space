@@ -4,26 +4,11 @@ interface BtnType {
   onClick: () => void;
 }
 
-const Container = styled.div<{ background: string }>`
-  position: relative;
-  background-color: white;
-  z-index: 10;
-  > .bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url(${(props) => props.background});
-    background-size: cover;
-    filter: blur(20px);
-    -webkit-filter: blur(20px);
-    opacity: 0.5;
-    z-index: -1;
-  }
-`;
-
-const Section = styled.section`
+const Section = styled.section<{ background: boolean }>`
   width: 85vw;
   padding: 50px 20px;
+  background-color: ${(props) => !props.background && "white"};
+  z-index: 10;
   h2 {
     font-size: 2rem;
     font-weight: 800;
@@ -125,4 +110,16 @@ const Btn = styled.button<BtnType>`
   }
 `;
 
-export { Container, Section, CurrentItem, List, ListItem, Btn };
+const Bg = styled.div<{ background: string }>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background-image: url(${(props) => props.background});
+  background-size: cover;
+  -webkit-filter: blur(20px);
+  opacity: 0.5;
+  z-index: -1;
+`;
+export { Section, CurrentItem, List, ListItem, Btn, Bg };

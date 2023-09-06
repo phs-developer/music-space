@@ -5,6 +5,11 @@ import PlayBtn from "../../conponents/PlayBtn";
 export default function ItemList({ items }: { items: Array<ListProps> }) {
   return (
     <List>
+      {items.length === 0 && (
+        <ListItem>
+          <div>리스트 없음</div>
+        </ListItem>
+      )}
       {items.map((item) => {
         return (
           <ListItem>

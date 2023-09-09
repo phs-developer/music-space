@@ -35,7 +35,6 @@ interface listType {
 export function PlayList({ list }: { list: Array<listType> | [] }) {
   const [currentItem, setCurrentItem] = useState<CurrentProps | null>(null);
   const token = localStorage.getItem("token");
-  console.log(currentItem);
 
   useEffect(() => {
     list.length > 0 && onChangeCurrentItem(list[0].id);

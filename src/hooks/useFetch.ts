@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-interface TopListsProps {
+const token = localStorage.getItem("token");
+
+//카테고리 API
+interface CategoryProps {
   images: {
     url: string;
   }[];
@@ -9,14 +12,6 @@ interface TopListsProps {
   description: string;
   id: string;
 }
-interface SearchProps {
-  images: {
-    url: string;
-  }[];
-  name: string;
-  id: string;
-}
-
 interface CategoryData {
   data: {
     playlists: {
@@ -31,24 +26,8 @@ interface CategoryData {
     };
   };
 }
-interface tracksData {
-  data: {
-    albums: {
-      items: {
-        images: {
-          url: string;
-        }[];
-        name: string;
-        id: string;
-      }[];
-    };
-  };
-}
-
-const token = localStorage.getItem("token");
-
 function useCategoryFetch(url: string) {
-  const [list, setList] = useState<Array<TopListsProps> | []>([]);
+  const [list, setList] = useState<Array<CategoryProps> | []>([]);
 
   useEffect(() => {
     (async function () {
@@ -64,6 +43,20 @@ function useCategoryFetch(url: string) {
   return list;
 }
 
+//검색 API
+interface tracksData {
+  data: {
+    albums: {
+      items: {
+        images: {
+          url: string;
+        }[];
+        name: string;
+        id: string;
+      }[];
+    };
+  };
+}
 function useSearchFetch(url: string) {
   (async function () {
     const data: tracksData = await axios(url, {
@@ -76,7 +69,8 @@ function useSearchFetch(url: string) {
   })();
 }
 
-interface Item {
+//카테고리 리스트 API
+interface CategoryList {
   album: {
     images: {
       url: string;
@@ -90,7 +84,7 @@ interface Item {
 }
 
 function useCategoryListFetch(listID: string) {
-  const [list, setList] = useState<Array<Item> | []>([]);
+  const [list, setList] = useState<Array<CategoryList> | []>([]);
   useEffect(() => {
     (async function () {
       let items = [];
@@ -111,4 +105,25 @@ function useCategoryListFetch(listID: string) {
   return list;
 }
 
-export { useCategoryFetch, useSearchFetch, useCategoryListFetch };
+function useGetToken() {
+  async function getToken() {
+    const setDate = new Date();
+    const res = await axios.get("http://localhost:8080");
+    localStorage.setItem("token", res.data.access_token);
+    localStorage.setItem("tokenTime", String(setDate.getTime()));
+  }
+  // 토큰이 있으면 유효시간 확인 후 사용, 없으면 발급
+  if (!token) {
+    getToken();
+  } else {
+    const tokenTime = localStorage.getItem("tokenTime");
+    const currentTime = new Date();
+    const validTime = (currentTime.getTime() - Number(tokenTime)) / 1000;
+    console.log(validTime);
+    return validTime >= 3000 ? getToken() : token;
+  }
+
+  return;
+}
+
+export { useCategoryFetch, useSearchFetch, useCategoryListFetch, useGetToken };

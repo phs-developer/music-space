@@ -10,6 +10,8 @@ import ProdCard from "./pages/prodCard/ProdCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import bg from "./assets/bg.jpg";
+import { time } from "console";
+import { useGetToken } from "./hooks/useFetch";
 
 interface listType {
   id: string;
@@ -18,16 +20,8 @@ interface listType {
 }
 
 function App() {
-  useEffect(() => {
-    (async function () {
-      const token = localStorage.getItem("token");
-      // 새로고침 시 토큰 재발급 방지
-      if (!token) {
-        const res = await axios.get("http://localhost:8080");
-        localStorage.setItem("token", res.data.access_token);
-      }
-    })();
-  }, []);
+  // 토큰 확인
+  useGetToken();
 
   const [playlist, setPlaylist] = useState<Array<listType> | []>([]);
 
@@ -38,7 +32,6 @@ function App() {
       title: title,
     };
     setPlaylist([newItem, ...playlist]);
-    console.log(playlist);
   }
 
   return (

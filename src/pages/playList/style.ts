@@ -4,10 +4,10 @@ interface BtnType {
   onClick: () => void;
 }
 
-const Section = styled.section<{ background: boolean }>`
+const Section = styled.section<{ background: string }>`
   width: 85vw;
   padding: 50px 20px;
-  background-color: ${(props) => !props.background && "white"};
+  background-color: ${(props) => props.background};
   z-index: 10;
   h2 {
     font-size: 2rem;

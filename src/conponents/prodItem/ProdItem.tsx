@@ -1,5 +1,7 @@
 import { ProdBox, ProdImg, ProdInfo, AddBtn } from "./style";
 import plusImg from "../../assets/plus.png";
+import { useDispatch } from "react-redux";
+import { addList, dispatchType } from "../../store/reducer/myList";
 
 interface Data {
   imgURL: string;
@@ -9,7 +11,7 @@ interface Data {
   addPlaylist: (id: string, imgURL: string, name: string) => void;
 }
 
-// 매개변수 id는 트랙의 id로 받아와야 함.
+// 매개변수의 id는 트랙의 id로 받아와야 함.
 export default function ProdItem({
   imgURL,
   name,
@@ -17,8 +19,19 @@ export default function ProdItem({
   id,
   addPlaylist,
 }: Data) {
+  const dispatch = useDispatch();
+  const addItem = (item: dispatchType) => {
+    dispatch(addList(item));
+  };
+  const itemInfo = {
+    id: id,
+    imgURL: imgURL,
+    name: name,
+  };
+
   return (
-    <ProdBox onClick={() => addPlaylist(id, imgURL, name)}>
+    // <ProdBox onClick={() => addPlaylist(id, imgURL, name)}>
+    <ProdBox onClick={() => addItem(itemInfo)}>
       <ProdImg src={imgURL} alt="prodImg" />
       <ProdInfo>
         <p className="trackName">{trackName}</p>

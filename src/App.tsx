@@ -6,12 +6,11 @@ import "./App.css";
 import { Main } from "./App.style";
 import Search from "./pages/search/Search";
 import { PlayList } from "./pages/playList/PlayList";
-import ProdCard from "./pages/prodCard/ProdCard";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import bg from "./assets/bg.jpg";
-import { time } from "console";
-import { useGetToken } from "./hooks/useFetch";
+import useGetToken from "./hooks/useGetToken";
+import Login from "./pages/login/Login";
+import axios from "axios";
 
 interface listType {
   id: string;
@@ -20,9 +19,7 @@ interface listType {
 }
 
 function App() {
-  // 토큰 확인
   useGetToken();
-
   const [playlist, setPlaylist] = useState<Array<listType> | []>([]);
 
   function addPlaylist(id: string, img: string, title: string) {
@@ -32,7 +29,20 @@ function App() {
       title: title,
     };
     setPlaylist([newItem, ...playlist]);
+    console.log(playlist);
   }
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   (async function () {
+  //     const data = await axios("https://api.spotify.com/v1/me/player", {
+  //       headers: {
+  //         Authorization: "Bearer " + token,
+  //       },
+  //     });
+  //     console.log(data);
+  //   })();
+  // }, []);
 
   return (
     <>
@@ -43,7 +53,7 @@ function App() {
           <Route path="/" element={<Home addPlaylist={addPlaylist} />} />
           <Route path="search" element={<Search addPlaylist={addPlaylist} />} />
           <Route path="playList" element={<PlayList list={playlist} />} />
-          <Route path="card" element={<ProdCard />} />
+          <Route path="login" element={<Login />} />
         </Routes>
       </Main>
     </>

@@ -1,22 +1,33 @@
-import { List, ListItem } from "./style";
-import { ListProps } from "./PlayList";
-import PlayBtn from "../../conponents/PlayBtn";
+import { Btn, List, ListItem } from "./style";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/reducer/reducer";
+import play from "../../assets/play.png";
 
-export default function ItemList({ items }: { items: Array<ListProps> }) {
+type Props = {
+  onChangeCurrentItem: (id: string) => void;
+};
+
+export default function ItemList({ onChangeCurrentItem }: Props) {
+  const list = useSelector((state: RootState) => state.setList.list);
+  console.log(list);
+
   return (
     <List>
-      {items.length === 0 && (
+      {list.length <= 0 && (
         <ListItem>
           <div>리스트 없음</div>
         </ListItem>
       )}
-      {items.map((item) => {
+      {list.map((item) => {
         return (
           <ListItem>
             <div>
-              <img src={item.imgUrl} alt="이미지" />
-              <span>{item.title}</span>
+              <img src={item.imgURL} alt="이미지" />
+              <span>{item.name}</span>
             </div>
+            <Btn type="button" onClick={() => onChangeCurrentItem(item.id)}>
+              <img src={play} alt="재생버튼" />
+            </Btn>
           </ListItem>
         );
       })}

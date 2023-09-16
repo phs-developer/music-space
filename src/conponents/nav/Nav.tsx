@@ -1,5 +1,6 @@
 import { NavContainer, Ul, Logo } from "./style";
 import { Link } from "react-router-dom";
+import bg from "../../assets/login.png";
 
 export default function Nav() {
   return (
@@ -14,6 +15,9 @@ export default function Nav() {
         </li>
         <li>
           <Link to="playList">라이브러리</Link>
+        </li>
+        <li>
+          <Link to="login">로그인</Link>
         </li>
       </Ul>
     </NavContainer>

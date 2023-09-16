@@ -18,6 +18,14 @@ const ProdBox = styled.div`
     max-width: 100px;
     max-height: 100px;
   }
+  &: active {
+    .hoverAction {
+      img {
+        background-color: rgba(105, 105, 105, 0.8);
+        border-radius: 50px;
+      }
+    }
+  }
 `;
 
 const ProdImg = styled.img`

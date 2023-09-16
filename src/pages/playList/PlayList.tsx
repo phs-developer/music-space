@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { Section, CurrentItem, List, ListItem, Btn, Bg } from "./style";
+import { Section, CurrentItem, Bg } from "./style";
 import { useState } from "react";
 import axios from "axios";
 import SpotifyBtn from "../../conponents/SpotifyBtn";
-import play from "../../assets/play.png";
 import white from "../../assets/white_bg.jpg";
+import ItemList from "./ItemList";
 
 interface CurrentProps {
   album: {
@@ -52,30 +52,11 @@ export function PlayList({ list }: { list: Array<listType> | [] }) {
   }
 
   return (
-    <Section background={!list[0]}>
+    <Section background={list[0] && "white"}>
       <h2>Playlist</h2>
       <div className="listBox">
         <Play item={currentItem} />
-        <List>
-          {list.length === 0 && (
-            <ListItem>
-              <div>리스트 없음</div>
-            </ListItem>
-          )}
-          {list.map((item) => {
-            return (
-              <ListItem>
-                <div>
-                  <img src={item.imgUrl} alt="이미지" />
-                  <span>{item.title}</span>
-                </div>
-                <Btn type="button" onClick={() => onChangeCurrentItem(item.id)}>
-                  <img src={play} alt="재생버튼" />
-                </Btn>
-              </ListItem>
-            );
-          })}
-        </List>
+        <ItemList onChangeCurrentItem={onChangeCurrentItem} />
       </div>
     </Section>
   );

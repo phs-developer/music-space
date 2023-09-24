@@ -33,9 +33,12 @@ const CurrentItem = styled.div`
     width: 600px;
     height: 600px;
   }
-  span {
+  > div {
     display: flex;
     flex-direction: column;
+    width: 600px;
+  }
+  span {
     margin: 0px 0px 0.5rem 5px;
     font-weight: bold;
     color: #444544;
@@ -50,6 +53,7 @@ const CurrentItem = styled.div`
   }
   a {
     font-size: 1rem;
+    width: fit-content;
   }
 `;
 

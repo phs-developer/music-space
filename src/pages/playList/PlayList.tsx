@@ -5,6 +5,8 @@ import axios from "axios";
 import SpotifyBtn from "../../conponents/SpotifyBtn";
 import white from "../../assets/white_bg.jpg";
 import ItemList from "./ItemList";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/reducer/reducer";
 
 interface CurrentProps {
   album: {
@@ -25,22 +27,18 @@ export interface ListProps {
   imgUrl: string;
   title: string;
 }
-interface listType {
-  id: string;
-  imgUrl: string;
-  title: string;
-}
 
 // 트랙의 spotify ID가 있는 리스트를 props로 받아와야 함. (=전역 상태 관리, 장바구니 역할)
-export function PlayList({ list }: { list: Array<listType> | [] }) {
+export function PlayList() {
+  const list = useSelector((state: RootState) => state.setList.list);
   const [currentItem, setCurrentItem] = useState<CurrentProps | null>(null);
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    list.length > 0 && onChangeCurrentItem(list[0].id);
+    list.length > 1 && onChangeCurrentItem(list[0].id);
   }, [list]);
 
   function onChangeCurrentItem(id: string) {
+    const token = localStorage.getItem("token");
     (async function () {
       const res = await axios(`https://api.spotify.com/v1/tracks/${id}`, {
         headers: {
@@ -56,7 +54,7 @@ export function PlayList({ list }: { list: Array<listType> | [] }) {
       <h2>Playlist</h2>
       <div className="listBox">
         <Play item={currentItem} />
-        <ItemList onChangeCurrentItem={onChangeCurrentItem} />
+        <ItemList list={list} onChangeCurrentItem={onChangeCurrentItem} />
       </div>
     </Section>
   );

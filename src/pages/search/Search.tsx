@@ -1,21 +1,8 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  FormEventHandler,
-  useState,
-  useEffect,
-} from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import ProdItem from "../../conponents/prodItem/ProdItem";
 import { Section, Input, SearchList } from "./style";
-import { useSearchFetch, useCategoryFetch } from "../../hooks/useFetch";
 import axios from "axios";
 
-interface Data {
-  imgURL: string;
-  name: string;
-  description: string;
-  id: string;
-}
 interface listType {
   album: {
     images: {
@@ -29,11 +16,7 @@ interface listType {
   name: string;
 }
 
-interface Props {
-  addPlaylist: (id: string, img: string, title: string) => void;
-}
-
-export default function Search({ addPlaylist }: Props) {
+export default function Search() {
   const [value, setValue] = useState<string>("");
   const [list, setList] = useState<Array<listType> | []>([]);
 
@@ -75,7 +58,6 @@ export default function Search({ addPlaylist }: Props) {
         {list?.map((e) => {
           return (
             <ProdItem
-              addPlaylist={addPlaylist}
               key={e.id}
               id={e.id}
               imgURL={e.album.images[0].url}

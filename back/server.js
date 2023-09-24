@@ -36,3 +36,65 @@ app.get("/", async function (req, res) {
     });
   res.send(result);
 });
+
+//--------------------------------
+
+const redirect_uri = "http://localhost:3000/loginSeuccess";
+const querystring = require("querystring");
+
+app.get("/login", function (req, res) {
+  // var state = generateRandomString(16);
+  // var scope = 'user-read-private user-read-email';
+
+  return res.json(
+    "https://accounts.spotify.com/authorize?" +
+      querystring.stringify({
+        response_type: "code",
+        client_id: CLIENT_ID,
+        redirect_uri: redirect_uri,
+        // scope: scope,
+        // state: state
+      })
+  );
+});
+
+//-------------------------------
+app.use(express.json()); // for parsing application/json
+// app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+app.post("/loginSuccess", async function (req, res) {
+  const code = req.body.body.code;
+  const authOptions2 = {
+    method: "post",
+    url: "https://accounts.spotify.com/api/token",
+    headers: {
+      Authorization:
+        "Basic " +
+        new Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
+      // "Content-Type": "application/x-www-form-urlencoded",
+    },
+    params: {
+      code: code,
+      redirect_uri: redirect_uri,
+      grant_type: "authorization_code",
+    },
+    json: true,
+  };
+
+  const result = await axios(authOptions2)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err;
+    });
+  res.send(result);
+  console.log(result);
+  // .then((response) => {
+  //   return response.data;
+  // })
+  // .catch((error) => {
+  //   return error;
+  // });
+  // res.send(result);
+});

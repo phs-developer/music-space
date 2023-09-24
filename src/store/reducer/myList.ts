@@ -40,8 +40,6 @@ export const setList = (
   state: InitalStateType = initalState,
   action: SetListType
 ) => {
-  console.log(state);
-
   switch (action.type) {
     case ADDLIST:
       return {

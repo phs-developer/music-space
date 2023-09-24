@@ -1,25 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import { LoginForm } from "./style";
-import { decreseCount, increseCount } from "../../store/reducer/counter";
-import { RootState } from "../../store/reducer/reducer";
+import axios from "axios";
 
 export default function Login() {
-  const count = useSelector((state: RootState) => state.counter.count);
-  const dispatch = useDispatch();
+  async function login() {
+    const res = await axios.get("http://localhost:8080/login");
 
-  const onIncrease = () => {
-    dispatch(increseCount());
-  };
-  const onDecrease = () => {
-    dispatch(decreseCount());
-  };
+    // 스포티파이에서 제공한 로그인 페이지로 이동
+    window.location.href = res.data;
+  }
 
-  // return <LoginForm onClick={increse}>로그인 화면 {count}</LoginForm>;
   return (
     <>
-      <h1> {count} </h1>
-      <button onClick={onIncrease}>+1</button>
-      <button onClick={onDecrease}>-1</button>
+      <button onClick={login}>로그인</button>
     </>
   );
 }

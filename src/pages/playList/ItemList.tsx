@@ -1,16 +1,16 @@
 import { Btn, List, ListItem } from "./style";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/reducer/reducer";
 import play from "../../assets/play.png";
 
 type Props = {
+  list: {
+    id: string;
+    imgURL: string;
+    name: string;
+  }[];
   onChangeCurrentItem: (id: string) => void;
 };
 
-export default function ItemList({ onChangeCurrentItem }: Props) {
-  const list = useSelector((state: RootState) => state.setList.list);
-  console.log(list);
-
+export default function ItemList({ list, onChangeCurrentItem }: Props) {
   return (
     <List>
       {list.length <= 0 && (

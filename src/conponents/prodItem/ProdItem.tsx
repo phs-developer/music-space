@@ -8,17 +8,10 @@ interface Data {
   name: string;
   id: string;
   trackName?: string;
-  addPlaylist: (id: string, imgURL: string, name: string) => void;
 }
 
 // 매개변수의 id는 트랙의 id로 받아와야 함.
-export default function ProdItem({
-  imgURL,
-  name,
-  trackName,
-  id,
-  addPlaylist,
-}: Data) {
+export default function ProdItem({ imgURL, name, trackName, id }: Data) {
   const dispatch = useDispatch();
   const addItem = (item: dispatchType) => {
     dispatch(addList(item));

@@ -1,6 +1,10 @@
 import ProdItem from "../../conponents/prodItem/ProdItem";
 import { Section, Container } from "./style";
 import { useCategoryListFetch } from "../../hooks/useFetch";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/reducer/reducer";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 // 인기 리스트 : toplists "37i9dQZF1DXcBWIGoYBM5M"
 // 팝 : "0JQ5DAqbMKFEC4WFtoNRpw" "37i9dQZF1DWVuUd3Ffrcx8"
@@ -22,36 +26,43 @@ interface Item {
   name: string;
 }
 
-interface Props {
-  addPlaylist: (id: string, img: string, title: string) => void;
-}
-
-export default function Home({ addPlaylist }: Props) {
+export default function Home() {
   const pop = useCategoryListFetch("37i9dQZF1DWVuUd3Ffrcx8");
   const top = useCategoryListFetch("37i9dQZF1DXcBWIGoYBM5M");
   const hippop = useCategoryListFetch("37i9dQZF1DWW46Vfs1oltB");
   const workOut = useCategoryListFetch("37i9dQZF1DX3ZeFHRhhi7Y");
   const driving = useCategoryListFetch("37i9dQZF1DWWMOmoXKqHTD");
   const rnb = useCategoryListFetch("37i9dQZF1DX4SBhb3fqCJd");
+  const [userName, setUserName] = useState(null);
+
+  const token = useSelector((state: RootState) => state.setAccessToken.token);
+  console.log("토큰 : " + token);
+  token.length > 0 &&
+    (async function () {
+      const res = await axios(`https://api.spotify.com/v1/me`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      setUserName(res.data.display_name);
+      console.log(res);
+    })();
 
   return (
     <Section>
-      <h1>Welcome, Your Music Space!</h1>
+      {userName ? (
+        <h1>Welcome, {userName} Music Space!</h1>
+      ) : (
+        <h1>Welcome, Your Music Space!</h1>
+      )}
+      {/* <h1></h1> */}
       <div>
-        <Category category={pop} title="TOP" addPlaylist={addPlaylist} />
-        <Category category={top} title="POP" addPlaylist={addPlaylist} />
-        <Category category={hippop} title="HIP-POP" addPlaylist={addPlaylist} />
-        <Category
-          category={workOut}
-          title="WORK-OUT"
-          addPlaylist={addPlaylist}
-        />
-        <Category
-          category={driving}
-          title="DRIVING"
-          addPlaylist={addPlaylist}
-        />
-        <Category category={rnb} title="R&B" addPlaylist={addPlaylist} />
+        <Category category={pop} title="TOP" />
+        <Category category={top} title="POP" />
+        <Category category={hippop} title="HIP-POP" />
+        <Category category={workOut} title="WORK-OUT" />
+        <Category category={driving} title="DRIVING" />
+        <Category category={rnb} title="R&B" />
       </div>
     </Section>
   );
@@ -60,11 +71,9 @@ export default function Home({ addPlaylist }: Props) {
 function Category({
   category,
   title,
-  addPlaylist,
 }: {
   category: Array<Item> | null;
   title: string;
-  addPlaylist: (id: string, imgURL: string, name: string) => void;
 }) {
   return (
     <Container>
@@ -74,7 +83,6 @@ function Category({
           category.map((item) => {
             return (
               <ProdItem
-                addPlaylist={addPlaylist}
                 key={item.id}
                 imgURL={item.album.images[0].url}
                 trackName={item.name}

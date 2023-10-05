@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/reducer/reducer";
 
 const token = localStorage.getItem("token");
 
@@ -70,7 +72,22 @@ function useSearchFetch(url: string) {
 }
 
 //카테고리 리스트 API
-interface CategoryList {
+export interface ListType {
+  name: string;
+  list: {
+    album: {
+      images: {
+        url: string;
+      }[];
+    };
+    artists: {
+      name: string;
+    }[];
+    id: string;
+    name: string;
+  }[];
+}
+interface ListItemType {
   album: {
     images: {
       url: string;
@@ -84,10 +101,11 @@ interface CategoryList {
 }
 
 function useCategoryListFetch(listID: string) {
-  const [list, setList] = useState<Array<CategoryList> | []>([]);
+  const [list, setList] = useState<ListType | null>(null);
+  // const token = useSelector((state: RootState) => state.setAccessToken.token);
+  const token = localStorage.getItem("token");
   useEffect(() => {
     (async function () {
-      let items = [];
       const res = await axios(
         `https://api.spotify.com/v1/playlists/${listID}`,
         {
@@ -96,12 +114,16 @@ function useCategoryListFetch(listID: string) {
           },
         }
       );
+      const name: string = res.data.name;
+      let list: Array<ListItemType> = [];
       for (let i = 0; i < 4; i++) {
-        items.push(res.data.tracks.items[i].track);
+        list.push(res.data.tracks.items[i].track);
       }
-      setList(items);
+
+      setList({ name: name, list: list });
     })();
-  }, [listID]);
+  }, [listID, token]);
+
   return list;
 }
 

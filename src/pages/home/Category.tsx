@@ -62,7 +62,7 @@ export function Category() {
   return (
     <>
       {list.map((e) => {
-        return e && <CategorySection category={e} />;
+        return e && <CategorySection category={e} key={e.name} />;
       })}
     </>
   );

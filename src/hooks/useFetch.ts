@@ -102,7 +102,6 @@ interface ListItemType {
 
 function useCategoryListFetch(listID: string) {
   const [list, setList] = useState<ListType | null>(null);
-  // const token = useSelector((state: RootState) => state.setAccessToken.token);
   const token = localStorage.getItem("token");
   useEffect(() => {
     (async function () {

@@ -6,9 +6,12 @@ const Section = styled.section`
   overflow: auto;
   height: 100vh;
   > h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 5rem;
+    > span {
+      font-size: 3rem;
+    }
   }
   > div {
     display: grid;

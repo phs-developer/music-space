@@ -5,24 +5,11 @@ import { useState } from "react";
 import axios from "axios";
 import { Category } from "./Category";
 
-interface Item {
-  album: {
-    images: {
-      url: string;
-    }[];
-  };
-  artists: {
-    name: string;
-  }[];
-  id: string;
-  name: string;
-}
-
 export default function Home() {
   const [userName, setUserName] = useState(null);
 
   const token = useSelector((state: RootState) => state.setAccessToken.token);
-  token.length > 0 &&
+  token &&
     (async function () {
       const res = await axios(`https://api.spotify.com/v1/me`, {
         headers: {
@@ -35,9 +22,11 @@ export default function Home() {
   return (
     <Section>
       {userName ? (
-        <h1>Welcome, {userName} Music Space!</h1>
+        <h1>
+          Welcome, <span>{userName}</span> MUSIC SPACE!
+        </h1>
       ) : (
-        <h1>Welcome, Your Music Space!</h1>
+        <h1>Welcome, MUSIC SPACE!</h1>
       )}
       <div>
         <Category />

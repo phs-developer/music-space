@@ -1,16 +1,16 @@
 import { styled } from "styled-components";
 import play from "../assets/play.png";
 
-export default function PlayBtn() {
+export default function PlayBtn(color: string) {
   return (
-    <Btn>
+    <Btn type="button" bgColor={color}>
       <img src={play} alt="재생버튼" />
     </Btn>
   );
 }
 
-const Btn = styled.button`
-  background-color: green;
+const Btn = styled.button<{ bgColor: string }>`
+  background-color: ${(props) => props.bgColor};
   border-radius: 50%;
   display: flex;
   justify-content: center;

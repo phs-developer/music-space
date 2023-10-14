@@ -31,22 +31,23 @@ export interface ListProps {
 // 트랙의 spotify ID가 있는 리스트를 props로 받아와야 함. (=전역 상태 관리, 장바구니 역할)
 export function PlayList() {
   const list = useSelector((state: RootState) => state.setList.list);
+  const token = useSelector((state: RootState) => state.setAccessToken.token);
   const [currentItem, setCurrentItem] = useState<CurrentProps | null>(null);
 
   useEffect(() => {
-    list.length > 1 && onChangeCurrentItem(list[0].id);
+    list.length > 0 && onChangeCurrentItem(list[0].id);
   }, [list]);
 
   function onChangeCurrentItem(id: string) {
-    const token = localStorage.getItem("token");
-    (async function () {
-      const res = await axios(`https://api.spotify.com/v1/tracks/${id}`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      return setCurrentItem(res.data);
-    })();
+    token &&
+      (async function () {
+        const res = await axios(`https://api.spotify.com/v1/tracks/${id}`, {
+          headers: {
+            Authorization: "Bearer " + token.number,
+          },
+        });
+        return setCurrentItem(res.data);
+      })();
   }
 
   return (

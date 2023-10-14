@@ -5,9 +5,9 @@ export const addList = (list: dispatchType) => ({
   type: ADDLIST,
   list,
 });
-export const deleteList = (list: dispatchType) => ({
+export const deleteList = (id: string) => ({
   type: DELETELIST,
-  list,
+  id,
 });
 
 export type dispatchType = {
@@ -17,23 +17,13 @@ export type dispatchType = {
 };
 
 type InitalStateType = {
-  list: {
-    id: string;
-    imgURL: string;
-    name: string;
-  }[];
+  list: dispatchType[];
 };
 
 type SetListType = ReturnType<typeof addList> | ReturnType<typeof deleteList>;
 
 const initalState: InitalStateType = {
-  list: [
-    {
-      id: "",
-      imgURL: "",
-      name: "",
-    },
-  ],
+  list: [],
 };
 
 export const setList = (
@@ -42,14 +32,16 @@ export const setList = (
 ) => {
   switch (action.type) {
     case ADDLIST:
+      console.log("dd");
       return {
         ...state,
         list: [action.list, ...state.list],
       };
     case DELETELIST:
+      const res = state.list.filter((item) => item.id !== action.id);
       return {
         ...state,
-        list: [action.list, ...state.list],
+        list: res,
       };
     default:
       return state;

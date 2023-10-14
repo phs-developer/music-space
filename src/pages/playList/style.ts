@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-interface BtnType {
+type BtnType = {
   onClick: () => void;
-}
+  color: string;
+};
 
 const Section = styled.section<{ background: string }>`
   width: 85vw;
@@ -83,14 +84,16 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   display: flex;
-  justify-content: space-between;
   margin-bottom: 2rem;
-  div {
+  > div {
     display: flex;
+    gap: 10px;
+  }
+  div:first-child {
     align-items: flex-end;
+    width: 90%;
     img {
       width: 70px;
-      margin-right: 10px;
     }
     span {
       color: red;
@@ -99,7 +102,7 @@ const ListItem = styled.li`
   }
 `;
 const Btn = styled.button<BtnType>`
-  background-color: green;
+  background-color: ${(props) => props.color};
   border-radius: 50%;
   display: flex;
   justify-content: center;

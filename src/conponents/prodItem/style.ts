@@ -21,8 +21,7 @@ const ProdBox = styled.div`
   &: active {
     .hoverAction {
       img {
-        background-color: rgba(105, 105, 105, 0.8);
-        border-radius: 50px;
+        transform: scale(1.3);
       }
     }
   }

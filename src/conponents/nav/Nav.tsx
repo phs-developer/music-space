@@ -28,7 +28,7 @@ export default function Nav() {
           <Link to="playList">라이브러리</Link>
         </li>
         <li>
-          {isLogin ? (
+          {isLogin?.name === "personal" ? (
             <div onClick={tokenReset}>로그아웃</div>
           ) : (
             <Link to="login">로그인</Link>

@@ -7,17 +7,19 @@ import { Category } from "./Category";
 
 export default function Home() {
   const [userName, setUserName] = useState(null);
-
   const token = useSelector((state: RootState) => state.setAccessToken.token);
-  token &&
-    (async function () {
-      const res = await axios(`https://api.spotify.com/v1/me`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      setUserName(res.data.display_name);
-    })();
+
+  if (token) {
+    token.name === "personal" &&
+      (async function () {
+        const res = await axios(`https://api.spotify.com/v1/me`, {
+          headers: {
+            Authorization: "Bearer " + token.number,
+          },
+        });
+        setUserName(res.data.display_name);
+      })();
+  }
 
   return (
     <Section>

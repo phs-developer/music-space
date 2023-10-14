@@ -1,7 +1,13 @@
 export const SETTOKEN = "ACCESSTOKEN/SETTOKEN" as const;
 export const RESETTOKEN = "ACCESSTOKEN/RESETTOKEN" as const;
 
-export const setToken = (token: string) => ({
+export type tokenObj = {
+  number: string;
+  name: string;
+  time: number;
+};
+
+export const setToken = (token: tokenObj) => ({
   type: SETTOKEN,
   token,
 });
@@ -10,11 +16,11 @@ export const resetToken = () => ({
 });
 
 export type InitialStateType = {
-  token: string | boolean;
+  token: tokenObj | null;
 };
 
 const initialState: InitialStateType = {
-  token: false,
+  token: null,
 };
 
 type ActionType = ReturnType<typeof setToken> | ReturnType<typeof resetToken>;
@@ -31,7 +37,7 @@ export const setAccessToken = (
     case RESETTOKEN:
       return {
         ...state,
-        token: false,
+        token: null,
       };
     default:
       return state;

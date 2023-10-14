@@ -102,25 +102,26 @@ interface ListItemType {
 
 function useCategoryListFetch(listID: string) {
   const [list, setList] = useState<ListType | null>(null);
-  const token = localStorage.getItem("token");
+  const token = useSelector((state: RootState) => state.setAccessToken.token);
   useEffect(() => {
-    (async function () {
-      const res = await axios(
-        `https://api.spotify.com/v1/playlists/${listID}`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
+    token &&
+      (async function () {
+        const res = await axios(
+          `https://api.spotify.com/v1/playlists/${listID}`,
+          {
+            headers: {
+              Authorization: "Bearer " + token.number,
+            },
+          }
+        );
+        const name: string = res.data.name;
+        let list: Array<ListItemType> = [];
+        for (let i = 0; i < 4; i++) {
+          list.push(res.data.tracks.items[i].track);
         }
-      );
-      const name: string = res.data.name;
-      let list: Array<ListItemType> = [];
-      for (let i = 0; i < 4; i++) {
-        list.push(res.data.tracks.items[i].track);
-      }
 
-      setList({ name: name, list: list });
-    })();
+        setList({ name: name, list: list });
+      })();
   }, [listID, token]);
 
   return list;

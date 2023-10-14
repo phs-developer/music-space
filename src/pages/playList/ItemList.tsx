@@ -1,5 +1,8 @@
 import { Btn, List, ListItem } from "./style";
 import play from "../../assets/play.png";
+import x from "../../assets/x.png";
+import { useDispatch } from "react-redux";
+import { deleteList } from "../../store/reducer/myList";
 
 type Props = {
   list: {
@@ -11,6 +14,11 @@ type Props = {
 };
 
 export default function ItemList({ list, onChangeCurrentItem }: Props) {
+  const dispatch = useDispatch();
+  function deleteItem(id: string) {
+    console.log("d");
+    dispatch(deleteList(id));
+  }
   return (
     <List>
       {list.length <= 0 && (
@@ -20,14 +28,27 @@ export default function ItemList({ list, onChangeCurrentItem }: Props) {
       )}
       {list.map((item) => {
         return (
-          <ListItem>
+          <ListItem key={item.id}>
             <div>
               <img src={item.imgURL} alt="이미지" />
               <span>{item.name}</span>
             </div>
-            <Btn type="button" onClick={() => onChangeCurrentItem(item.id)}>
-              <img src={play} alt="재생버튼" />
-            </Btn>
+            <div>
+              <Btn
+                type="button"
+                color="green"
+                onClick={() => onChangeCurrentItem(item.id)}
+              >
+                <img src={play} alt="재생버튼" />
+              </Btn>
+              <Btn
+                type="button"
+                color="red"
+                onClick={() => deleteItem(item.id)}
+              >
+                <img src={x} alt="삭제버튼" />
+              </Btn>
+            </div>
           </ListItem>
         );
       })}

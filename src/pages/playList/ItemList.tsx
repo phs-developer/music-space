@@ -16,7 +16,6 @@ type Props = {
 export default function ItemList({ list, onChangeCurrentItem }: Props) {
   const dispatch = useDispatch();
   function deleteItem(id: string) {
-    console.log("d");
     dispatch(deleteList(id));
   }
   return (

@@ -32,7 +32,6 @@ export const setList = (
 ) => {
   switch (action.type) {
     case ADDLIST:
-      console.log("dd");
       return {
         ...state,
         list: [action.list, ...state.list],

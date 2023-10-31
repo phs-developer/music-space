@@ -10,6 +10,7 @@ import bg from "./assets/bg.jpg";
 import useGetToken from "./hooks/useGetToken";
 import Login from "./pages/login/Login";
 import { LoginSuccess } from "./pages/login/LoginSuccess";
+import { MyPage } from "./pages/MyPage/MyPage";
 
 function App() {
   useGetToken();
@@ -25,6 +26,7 @@ function App() {
           <Route path="playList" element={<PlayList />} />
           <Route path="login" element={<Login />} />
           <Route path="loginSeuccess" element={<LoginSuccess />} />
+          <Route path="myPage" element={<MyPage />} />
         </Routes>
       </Main>
     </>

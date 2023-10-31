@@ -20,7 +20,7 @@ const Section = styled.section<{ background: string }>`
     justify-content: center;
     column-gap: 3rem;
     height: 90%;
-    margin: 80px 100px 0px 100px;
+    margin: 40px 100px 0px 100px;
     border-radius: 10px;
   }
 `;
@@ -33,6 +33,7 @@ const CurrentItem = styled.div`
   img {
     width: 600px;
     height: 600px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
   }
   > div {
     display: flex;

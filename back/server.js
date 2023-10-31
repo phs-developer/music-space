@@ -45,6 +45,8 @@ const querystring = require("querystring");
 app.get("/login", function (req, res) {
   // var state = generateRandomString(16);
   // var scope = 'user-read-private user-read-email';
+  const scopeList =
+    "user-follow-modify user-follow-read user-read-email user-read-playback-state playlist-read-private playlist-modify-private playlist-modify-public";
 
   return res.json(
     "https://accounts.spotify.com/authorize?" +
@@ -52,7 +54,7 @@ app.get("/login", function (req, res) {
         response_type: "code",
         client_id: CLIENT_ID,
         redirect_uri: redirect_uri,
-        // scope: scope,
+        scope: scopeList,
         // state: state
       })
   );

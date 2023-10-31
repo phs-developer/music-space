@@ -10,8 +10,8 @@ export default function Login() {
 
   return (
     <LoginForm>
-      <p>'로그인' 버튼을 클릭하면 스포티파이 계정과 연동됩니다.</p>
-      <LoginButn onClick={login}>로그인</LoginButn>
+      <p>버튼을 클릭하면 스포티파이 계정과 연동됩니다.</p>
+      <LoginButn onClick={login}>스포티파이로 로그인</LoginButn>
     </LoginForm>
   );
 }

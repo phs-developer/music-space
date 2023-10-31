@@ -29,6 +29,7 @@ export function LoginSuccess() {
           },
         },
       });
+      console.log(res.data);
       const token = {
         number: res.data.access_token,
         name: "personal",

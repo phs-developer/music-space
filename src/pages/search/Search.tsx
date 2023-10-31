@@ -2,6 +2,8 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import ProdItem from "../../conponents/prodItem/ProdItem";
 import { Section, Input, SearchList } from "./style";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/reducer/reducer";
 
 interface listType {
   album: {
@@ -14,30 +16,31 @@ interface listType {
   }[];
   id: string;
   name: string;
+  uri: string;
 }
 
 export default function Search() {
   const [value, setValue] = useState<string>("");
   const [list, setList] = useState<Array<listType> | []>([]);
+  const token = useSelector((state: RootState) => state.setAccessToken.token);
 
   function searchData(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!value) {
       return alert("키워드를 입력하세요!");
     } else {
-      const token = localStorage.getItem("token");
-      (async function () {
-        const res = await axios(
-          `https://api.spotify.com/v1/search?q=remaster%2520track%3A${value}&type=track&market=ES&limit=15`,
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
-        console.log(res);
-        setList(res.data.tracks.items);
-      })();
+      token &&
+        (async function () {
+          const res = await axios(
+            `https://api.spotify.com/v1/search?q=remaster%2520track%3A${value}&type=track&market=ES&limit=15`,
+            {
+              headers: {
+                Authorization: "Bearer " + token.number,
+              },
+            }
+          );
+          setList(res.data.tracks.items);
+        })();
     }
   }
 
@@ -63,6 +66,7 @@ export default function Search() {
               imgURL={e.album.images[0].url}
               trackName={e.name}
               name={e.artists[0].name}
+              uri={e.uri}
             />
           );
         })}

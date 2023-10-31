@@ -72,33 +72,18 @@ function useSearchFetch(url: string) {
 }
 
 //카테고리 리스트 API
-export interface ListType {
-  name: string;
-  list: {
-    album: {
-      images: {
-        url: string;
-      }[];
-    };
-    artists: {
-      name: string;
-    }[];
-    id: string;
-    name: string;
-  }[];
-}
-interface ListItemType {
-  album: {
-    images: {
-      url: string;
-    }[];
-  };
-  artists: {
-    name: string;
-  }[];
+type ListItemType = {
+  img: string;
+  artists_name: string;
   id: string;
+  track_name: string;
+  uri: string;
+};
+
+export type ListType = {
   name: string;
-}
+  list: ListItemType[];
+};
 
 function useCategoryListFetch(listID: string) {
   const [list, setList] = useState<ListType | null>(null);
@@ -117,7 +102,13 @@ function useCategoryListFetch(listID: string) {
         const name: string = res.data.name;
         let list: Array<ListItemType> = [];
         for (let i = 0; i < 4; i++) {
-          list.push(res.data.tracks.items[i].track);
+          list.push({
+            img: res.data.tracks.items[i].track.album.images[0].url,
+            artists_name: res.data.tracks.items[i].track.artists.name,
+            id: res.data.tracks.items[i].track.id,
+            track_name: res.data.tracks.items[i].track.name,
+            uri: res.data.tracks.items[i].track.uri,
+          });
         }
 
         setList({ name: name, list: list });

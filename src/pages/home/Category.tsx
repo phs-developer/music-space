@@ -1,6 +1,6 @@
 import ProdItem from "../../conponents/prodItem/ProdItem";
 import { Container } from "./style";
-import { useCategoryListFetch } from "../../hooks/useFetch";
+import { ListType, useCategoryListFetch } from "../../hooks/useFetch";
 
 export function Category() {
   /*    카테고리 api 코드
@@ -11,24 +11,6 @@ export function Category() {
   드라이빙 : "0JQ5DAqbMKFIRybaNTYXXy"
   알앤비 : "0JQ5DAqbMKFEZPnFQSFB1T"
   어쿠스틱 : "0JQ5DAqbMKFy78wprEpAjl" */
-
-  type ListItemType = {
-    album: {
-      images: {
-        url: string;
-      }[];
-    };
-    artists: {
-      name: string;
-    }[];
-    id: string;
-    name: string;
-  };
-
-  type ListType = {
-    name: string;
-    list: Array<ListItemType>;
-  };
 
   const pop = useCategoryListFetch("37i9dQZF1DWVuUd3Ffrcx8");
   const top = useCategoryListFetch("37i9dQZF1DXcBWIGoYBM5M");
@@ -47,10 +29,11 @@ export function Category() {
             return (
               <ProdItem
                 key={item.id}
-                imgURL={item.album.images[0].url}
-                trackName={item.name}
-                name={item.artists[0].name}
+                imgURL={item.img}
+                trackName={item.track_name}
+                name={item.artists_name}
                 id={item.id}
+                uri={item.uri}
               />
             );
           })}

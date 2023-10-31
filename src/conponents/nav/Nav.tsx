@@ -1,17 +1,10 @@
 import { NavContainer, Ul, Logo } from "./style";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducer/reducer";
-import { resetToken } from "../../store/reducer/accessToken";
 
 export default function Nav() {
-  const isLogin = useSelector((state: RootState) => state.setAccessToken.token);
-  const dispatch = useDispatch();
-
-  function tokenReset() {
-    // 로그아웃 시 토큰 초기화
-    dispatch(resetToken());
-  }
+  const token = useSelector((state: RootState) => state.setAccessToken.token);
 
   return (
     <NavContainer>
@@ -24,11 +17,11 @@ export default function Nav() {
           <Link to="search">검색하기</Link>
         </li>
         <li>
-          <Link to="playList">라이브러리</Link>
+          <Link to="playList">플레이리스트</Link>
         </li>
         <li>
-          {isLogin?.name === "personal" ? (
-            <div onClick={tokenReset}>로그아웃</div>
+          {token?.name === "personal" ? (
+            <Link to="myPage">프로필</Link>
           ) : (
             <Link to="login">로그인</Link>
           )}

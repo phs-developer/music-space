@@ -8,10 +8,11 @@ interface Data {
   name: string;
   id: string;
   trackName?: string;
+  uri: string;
 }
 
 // 매개변수의 id는 트랙의 id로 받아와야 함.
-export default function ProdItem({ imgURL, name, trackName, id }: Data) {
+export default function ProdItem({ imgURL, name, trackName, id, uri }: Data) {
   const dispatch = useDispatch();
   const addItem = (item: dispatchType) => {
     dispatch(addList(item));
@@ -20,10 +21,10 @@ export default function ProdItem({ imgURL, name, trackName, id }: Data) {
     id: id,
     imgURL: imgURL,
     name: name,
+    uri: uri,
   };
 
   return (
-    // <ProdBox onClick={() => addPlaylist(id, imgURL, name)}>
     <ProdBox onClick={() => addItem(itemInfo)}>
       <ProdImg src={imgURL} alt="prodImg" />
       <ProdInfo>

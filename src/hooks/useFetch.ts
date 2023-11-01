@@ -81,6 +81,9 @@ export type ListType = {
 function useCategoryListFetch(listID: string) {
   const [list, setList] = useState<ListType | null>(null);
   const token = useSelector((state: RootState) => state.setAccessToken.token);
+
+  console.log(token);
+
   useEffect(() => {
     token &&
       (async function () {
@@ -95,8 +98,8 @@ function useCategoryListFetch(listID: string) {
 
         const name: string = res.data.name;
         const item = res.data.tracks.items;
-
         let list: ProdItemType[] = [];
+
         for (let i = 0; i < 4; i++) {
           list.push({
             imgURL: item[i].track.album.images[0].url,

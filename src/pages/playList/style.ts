@@ -13,25 +13,38 @@ const Section = styled.section`
     font-size: 2rem;
     font-weight: 800;
     padding: 10px;
+    margin-bottom: 0.5rem;
+  }
+  select {
+    border-radius: 10px;
+    padding: 2px 5px;
+    margin-left: 10px;
+    margin-bottom: 1rem;
   }
   .listBox {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    column-gap: 3rem;
-    height: 90%;
-    margin: 40px 100px 0px 100px;
+    align-items: center;
+    row-gap: 2rem;
     border-radius: 10px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100vw;
+    padding: 50px 20px 0px 20px;
   }
 `;
 
 const CurrentItem = styled.div`
   display: flex;
-  flex-direction: column;
-  row-gap: 20px;
+  column-gap: 20px;
   font-size: 1.4rem;
+  align-items: flex-end;
+  width: 750px;
   img {
-    width: 600px;
-    height: 600px;
+    width: 200px;
+    height: 200px;
     border: 1px solid rgba(0, 0, 0, 0.2);
   }
   > div {
@@ -56,16 +69,19 @@ const CurrentItem = styled.div`
     font-size: 1rem;
     width: fit-content;
   }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const List = styled.ul`
-  width: 700px;
   display: flex;
   flex-direction: column;
   padding: 1.2rem;
   background-color: rgba(255, 255, 255, 0.2);
   overflow: auto;
-  height: 750px;
+  height: 500px;
+  width: 750px;
   &::-webkit-scrollbar {
     width: 13px;
   }
@@ -80,11 +96,14 @@ const List = styled.ul`
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
   }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const ListItem = styled.li`
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   > div {
     display: flex;
     gap: 10px;
@@ -95,9 +114,13 @@ const ListItem = styled.li`
     img {
       width: 70px;
     }
-    span {
-      color: red;
-      margin-bottom: 10px;
+    > div {
+      p {
+        margin-bottom: 5px;
+      }
+      p:last-child {
+        font-size: 0.8rem;
+      }
     }
   }
 `;

@@ -1,12 +1,18 @@
 import { styled } from "styled-components";
 
 const NavContainer = styled.nav`
-  width: 15vw;
+  width: 230px;
   height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
   padding: 10px 15px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
   z-index: 20;
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 const Logo = styled.h1`

@@ -3,6 +3,7 @@ import styled from "styled-components";
 const ProdBox = styled.div`
   display: flex;
   max-width: 200px;
+  width: 100%;
   flex-direction: column;
   cursor: pointer;
   position: relative;
@@ -28,8 +29,8 @@ const ProdBox = styled.div`
 `;
 
 const ProdImg = styled.img`
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 100%;
 `;
 
 const ProdInfo = styled.div`

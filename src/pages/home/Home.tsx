@@ -10,6 +10,7 @@ export default function Home() {
   const token = useSelector((state: RootState) => state.setAccessToken.token);
 
   if (token) {
+    // user 로그인 했을 경우 프로필 정보 받아오기
     token.name === "personal" &&
       (async function () {
         const res = await axios(`https://api.spotify.com/v1/me`, {

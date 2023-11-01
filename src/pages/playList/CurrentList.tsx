@@ -36,7 +36,10 @@ export default function CurrentList({
           <ListItem key={item.track.id}>
             <div>
               <img src={item.track.album.images[0].url} alt="이미지" />
-              <span>{item.track.name}</span>
+              <div>
+                <p>{item.track.name}</p>
+                <p>{item.track.artists[0].name}</p>
+              </div>
             </div>
             <div>
               <Btn

@@ -14,7 +14,7 @@ export default function Nav() {
           <Link to="/">홈</Link>
         </li>
         <li>
-          <Link to="search">검색하기</Link>
+          <Link to="search">노래검색</Link>
         </li>
         <li>
           <Link to="playList">플레이리스트</Link>

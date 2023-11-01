@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LoginForm = styled.div`
+const LoginForm = styled.section`
   margin: 0px auto;
   display: flex;
   flex-direction: column;
@@ -9,6 +9,12 @@ const LoginForm = styled.div`
   gap: 3rem;
   font-size: 1.3rem;
   font-weight: bold;
+  @media screen and (max-width: 768px) {
+    padding: 0px 20px;
+    line-height: 2rem;
+    text-align: center;
+    font-size: 1rem;
+  }
 `;
 
 const LoginButn = styled.button`

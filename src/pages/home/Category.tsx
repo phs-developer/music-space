@@ -29,11 +29,12 @@ export function Category() {
             return (
               <ProdItem
                 key={item.id}
-                imgURL={item.img}
-                trackName={item.track_name}
-                name={item.artists_name}
+                imgURL={item.imgURL}
+                trackName={item.trackName}
+                artistsName={item.artistsName}
                 id={item.id}
                 uri={item.uri}
+                releaseDate={item.releaseDate}
               />
             );
           })}

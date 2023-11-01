@@ -1,50 +1,69 @@
 import { useSelector } from "react-redux";
+import { CurrentItemType } from "../../store/reducer/myList";
 import CurrentList from "./CurrentList";
 import { CurrentPlay } from "./CurrentPlay";
-import axios from "axios";
 import { useState } from "react";
 import { RootState } from "../../store/reducer/reducer";
+import axios from "axios";
 
-type Props = {
-  listID: string;
-};
-
-type CurrentItemProps = {
-  album: {
-    images: {
-      url: string;
-    }[];
-    release_date: string;
-  };
-  artists: {
-    name: string;
-  }[];
-  name: string;
+export type CurrentPlayProps = {
+  imgURL: string;
+  artists_name: string;
+  track_name: string;
   uri: string;
+  release_date: string;
 };
 
-export const MyList = ({ listID }: Props) => {
+export const MyList = ({ listID }: { listID: string }) => {
   const token = useSelector((state: RootState) => state.setAccessToken.token);
-  const [currentItem, setCurrentItem] = useState<CurrentItemProps | null>(null);
-  console.log(listID);
-  // @@@@@ listID === '현재' ? redux연결 : id로 api조회 @@@@@
+  const [currentItem, setCurrentItem] = useState<CurrentPlayProps | null>(null);
+  const storageList = useSelector((state: RootState) => state.setList.list);
+  const [currentList, setCurrentList] = useState<CurrentItemType[]>([]);
 
-  function onChangeCurrentItem(id: string) {
+  // 보여질 리스트가 PLAYLIST라면 redux store에서 호출하고,
+  // user 재생목록이라면 api로 호출해서 CurrentList에 데이터 전달.
+  if (listID !== "PLAYLIST") {
     token &&
       (async function () {
-        const res = await axios(`https://api.spotify.com/v1/tracks/${id}`, {
-          headers: {
-            Authorization: "Bearer " + token.number,
-          },
-        });
-        return setCurrentItem(res.data);
+        const res = await axios(
+          `https://api.spotify.com/v1/playlists/${listID}/tracks`,
+          {
+            headers: {
+              Authorization: "Bearer " + token.number,
+            },
+          }
+        );
+        setCurrentList(res.data.items);
       })();
+  }
+
+  function onChangeCurrentItem(item: CurrentItemType) {
+    // 재생버튼 click 시 CurrentItem에 데이터 전달 (play)
+    const track = item.track;
+    setCurrentItem({
+      imgURL: track.album.images[0].url,
+      artists_name: track.artists[0].name,
+      track_name: track.name,
+      uri: track.uri,
+      release_date: track.album.release_date,
+    });
   }
 
   return (
     <div className="listBox">
-      {/* <CurrentPlay item={currentItem} /> */}
-      <CurrentList listID={listID} onChangeCurrentItem={onChangeCurrentItem} />
+      <CurrentPlay item={currentItem} />
+      {listID === "PLAYLIST" ? (
+        <CurrentList
+          listData={storageList}
+          onChangeCurrentItem={onChangeCurrentItem}
+          isAddBtn={token?.name === "personal" ? "ture" : undefined}
+        />
+      ) : (
+        <CurrentList
+          listData={currentList}
+          onChangeCurrentItem={onChangeCurrentItem}
+        />
+      )}
     </div>
   );
 };

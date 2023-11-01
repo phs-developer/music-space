@@ -1,47 +1,28 @@
 import SpotifyBtn from "../../conponents/SpotifyBtn";
 import { Bg, CurrentItem } from "./style";
 import white from "../../assets/white_bg.jpg";
+import { CurrentPlayProps } from "./MyList";
 
-interface CurrentProps {
-  album: {
-    images: {
-      url: string;
-    }[];
-    release_date: string;
-  };
-  artists: {
-    name: string;
-  }[];
-  name: string;
-  uri: string;
-}
-
-export const CurrentPlay = ({ item }: { item: CurrentProps | null }) => {
-  // 데이터 없을 시 기본값
+export const CurrentPlay = ({ item }: { item: CurrentPlayProps | null }) => {
   if (item === null) {
+    // 초기 상태 기본값
     item = {
-      album: {
-        images: [{ url: white }],
-        release_date: "발매일",
-      },
-      artists: [
-        {
-          name: "아티스트",
-        },
-      ],
-      name: "노래명",
+      imgURL: white,
+      artists_name: "가수명",
+      track_name: "노래명",
       uri: "/",
+      release_date: "발매일",
     };
   }
   return (
     <>
-      <Bg background={item.album.images[0].url} />
+      <Bg background={item.imgURL} />
       <CurrentItem>
-        <img src={item.album.images[0].url} alt="이미지" />
+        <img src={item.imgURL} alt="이미지" />
         <div>
-          <span>{item.name}</span>
-          <span>{item.artists[0].name}</span>
-          <span>{item.album.release_date}</span>
+          <span>{item.track_name}</span>
+          <span>{item.artists_name}</span>
+          <span>{item.release_date}</span>
           <SpotifyBtn uri={item.uri} />
         </div>
       </CurrentItem>

@@ -20,17 +20,13 @@ type itemsType = {
 // 트랙의 spotify ID가 있는 리스트를 props로 받아와야 함. (=전역 상태 관리, 장바구니 역할)
 export function PlayList() {
   const token = useSelector((state: RootState) => state.setAccessToken.token);
-  const storageList = useSelector((state: RootState) => state.setList.list);
   const [myList, setMyList] = useState<itemsType[]>([
     { id: "PLAYLIST", name: "PLAYLIST" },
   ]);
   const [selectedList, setSelectedList] = useState<itemsType>(myList[0]);
 
-  // useEffect(() => {
-  //   list.length > 0 && onChangeCurrentItem(list[0].id);
-  // }, [list]);
-
   useEffect(() => {
+    // user의 재생 목록 가져오기
     token &&
       axios({
         method: "get",
@@ -58,18 +54,19 @@ export function PlayList() {
   };
 
   return (
-    <Section background={storageList[0] && "white"}>
+    <Section>
       <h2>{selectedList.name}</h2>
-      <select value={selectedList.name} onChange={onSeleted}>
-        {myList.length > 0 &&
-          myList.map((item) => {
+      {token?.name === "personal" && (
+        <select value={selectedList.name} onChange={onSeleted}>
+          {myList.map((item) => {
             return (
               <option key={item.id} value={item.name}>
                 {item.name}
               </option>
             );
           })}
-      </select>
+        </select>
+      )}
       <MyList listID={selectedList.id} />
     </Section>
   );

@@ -1,27 +1,49 @@
 import { ProdBox, ProdImg, ProdInfo, AddBtn } from "./style";
 import plusImg from "../../assets/plus.png";
 import { useDispatch } from "react-redux";
-import { addList, dispatchType } from "../../store/reducer/myList";
+import { CurrentItemType, addList } from "../../store/reducer/myList";
 
-interface Data {
+export type ProdItemType = {
   imgURL: string;
-  name: string;
+  artistsName: string;
   id: string;
-  trackName?: string;
+  trackName: string;
   uri: string;
-}
+  releaseDate: string;
+};
 
-// 매개변수의 id는 트랙의 id로 받아와야 함.
-export default function ProdItem({ imgURL, name, trackName, id, uri }: Data) {
+// 매개변수의 id는 track_id !!
+export default function ProdItem({
+  imgURL,
+  artistsName,
+  trackName,
+  id,
+  uri,
+  releaseDate,
+}: ProdItemType) {
   const dispatch = useDispatch();
-  const addItem = (item: dispatchType) => {
+  const addItem = (item: CurrentItemType) => {
     dispatch(addList(item));
   };
-  const itemInfo = {
-    id: id,
-    imgURL: imgURL,
-    name: name,
-    uri: uri,
+  const itemInfo: CurrentItemType = {
+    track: {
+      album: {
+        images: [
+          {
+            url: imgURL,
+          },
+        ],
+        release_date: releaseDate,
+      },
+      artists: [
+        {
+          name: artistsName,
+        },
+      ],
+      id: id,
+      name: trackName,
+      uri: uri,
+    },
   };
 
   return (
@@ -29,7 +51,7 @@ export default function ProdItem({ imgURL, name, trackName, id, uri }: Data) {
       <ProdImg src={imgURL} alt="prodImg" />
       <ProdInfo>
         <p className="trackName">{trackName}</p>
-        <p className="name">{name}</p>
+        <p className="name">{artistsName}</p>
       </ProdInfo>
       <AddBtn className="hoverAction">
         <img src={plusImg} alt="plusIcon" />

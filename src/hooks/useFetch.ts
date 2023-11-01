@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/reducer/reducer";
+import { ProdItemType } from "../conponents/prodItem/ProdItem";
 
 const token = localStorage.getItem("token");
 
@@ -72,17 +73,9 @@ function useSearchFetch(url: string) {
 }
 
 //카테고리 리스트 API
-type ListItemType = {
-  img: string;
-  artists_name: string;
-  id: string;
-  track_name: string;
-  uri: string;
-};
-
 export type ListType = {
   name: string;
-  list: ListItemType[];
+  list: ProdItemType[];
 };
 
 function useCategoryListFetch(listID: string) {
@@ -99,18 +92,21 @@ function useCategoryListFetch(listID: string) {
             },
           }
         );
+
         const name: string = res.data.name;
-        let list: Array<ListItemType> = [];
+        const item = res.data.tracks.items;
+
+        let list: ProdItemType[] = [];
         for (let i = 0; i < 4; i++) {
           list.push({
-            img: res.data.tracks.items[i].track.album.images[0].url,
-            artists_name: res.data.tracks.items[i].track.artists.name,
-            id: res.data.tracks.items[i].track.id,
-            track_name: res.data.tracks.items[i].track.name,
-            uri: res.data.tracks.items[i].track.uri,
+            imgURL: item[i].track.album.images[0].url,
+            artistsName: item[i].track.artists.name,
+            id: item[i].track.id,
+            trackName: item[i].track.name,
+            uri: item[i].track.uri,
+            releaseDate: item[i].track.album.release_date,
           });
         }
-
         setList({ name: name, list: list });
       })();
   }, [listID, token]);

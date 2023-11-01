@@ -6,7 +6,6 @@ import styled from "styled-components";
 import baseImg from "../../assets/user.png";
 import { resetToken } from "../../store/reducer/accessToken";
 import { useNavigate } from "react-router-dom";
-import { Playlist } from "./Playlist";
 
 type ProfileType = {
   name: string;
@@ -80,7 +79,6 @@ export const MyPage = () => {
           </li>
         </Ul>
       </ProfileInfo>
-      <Playlist id={profile.id} />
     </Section>
   );
 };

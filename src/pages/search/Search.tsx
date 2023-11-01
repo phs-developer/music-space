@@ -10,6 +10,7 @@ interface listType {
     images: {
       url: string;
     }[];
+    release_date: string;
   };
   artists: {
     name: string;
@@ -65,8 +66,9 @@ export default function Search() {
               id={e.id}
               imgURL={e.album.images[0].url}
               trackName={e.name}
-              name={e.artists[0].name}
+              artistsName={e.artists[0].name}
               uri={e.uri}
+              releaseDate={e.album.release_date}
             />
           );
         })}

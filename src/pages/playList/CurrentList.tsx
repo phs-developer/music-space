@@ -1,71 +1,37 @@
 import { Btn, List, ListItem } from "./style";
 import play from "../../assets/play.png";
 import x from "../../assets/x.png";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteList } from "../../store/reducer/myList";
-import { useEffect, useState } from "react";
-import { RootState } from "../../store/reducer/reducer";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { CurrentItemType, deleteList } from "../../store/reducer/myList";
 
 type Props = {
-  listID: string;
-  onChangeCurrentItem: (id: string) => void;
+  listData: CurrentItemType[];
+  onChangeCurrentItem: (track: CurrentItemType) => void;
+  isAddBtn?: string | undefined;
 };
 
-type CurrentListType = {
-  track: {
-    album: {
-      images: {
-        url: string;
-      }[];
-    };
-    id: string;
-    name: string;
-    uri: string;
-  };
-};
-// type Props = {
-//   list: {
-//     id: string;
-//     imgURL: string;
-//     name: string;
-//   }[];
-//   onChangeCurrentItem: (id: string) => void;
-// };
-
-export default function CurrentList({ listID, onChangeCurrentItem }: Props) {
-  const [currentList, setCurrentList] = useState<CurrentListType[]>([]);
-  const token = useSelector((state: RootState) => state.setAccessToken.token);
+export default function CurrentList({
+  listData,
+  onChangeCurrentItem,
+  isAddBtn,
+}: Props) {
   const dispatch = useDispatch();
   function deleteItem(id: string) {
     dispatch(deleteList(id));
   }
 
-  useEffect(() => {
-    listID === "PLAYLIST"
-      ? console.log("현재리스트")
-      : token &&
-        (async function () {
-          const res = await axios(
-            `https://api.spotify.com/v1/playlists/${listID}/tracks`,
-            {
-              headers: {
-                Authorization: "Bearer " + token.number,
-              },
-            }
-          );
-          setCurrentList(res.data.items);
-        })();
-  }, [listID, token]);
+  const onAddList = () => {
+    console.log("재생목록 추가");
+  };
 
   return (
     <List>
-      {currentList.length <= 0 && (
+      {listData.length <= 0 && (
         <ListItem>
           <div>리스트 없음</div>
         </ListItem>
       )}
-      {currentList.map((item) => {
+      {listData.map((item) => {
         return (
           <ListItem key={item.track.id}>
             <div>
@@ -76,7 +42,7 @@ export default function CurrentList({ listID, onChangeCurrentItem }: Props) {
               <Btn
                 type="button"
                 color="green"
-                onClick={() => onChangeCurrentItem(item.track.id)}
+                onClick={() => onChangeCurrentItem(item)}
               >
                 <img src={play} alt="재생버튼" />
               </Btn>
@@ -87,6 +53,11 @@ export default function CurrentList({ listID, onChangeCurrentItem }: Props) {
               >
                 <img src={x} alt="삭제버튼" />
               </Btn>
+              {isAddBtn && (
+                <Btn type="button" color="gray" onClick={onAddList}>
+                  재생목록추가
+                </Btn>
+              )}
             </div>
           </ListItem>
         );

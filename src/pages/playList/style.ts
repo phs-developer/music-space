@@ -5,10 +5,9 @@ type BtnType = {
   color: string;
 };
 
-const Section = styled.section<{ background: string }>`
+const Section = styled.section`
   width: 85vw;
   padding: 50px 20px;
-  background-color: ${(props) => props.background};
   z-index: 10;
   h2 {
     font-size: 2rem;

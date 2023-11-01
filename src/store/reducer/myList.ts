@@ -1,7 +1,7 @@
 export const ADDLIST = "MYLIST/ADDLIST" as const;
 export const DELETELIST = "MYLIST/DELETELIST" as const;
 
-export const addList = (list: dispatchType) => ({
+export const addList = (list: CurrentItemType) => ({
   type: ADDLIST,
   list,
 });
@@ -10,14 +10,25 @@ export const deleteList = (id: string) => ({
   id,
 });
 
-export type dispatchType = {
-  id: string;
-  imgURL: string;
-  name: string;
+export type CurrentItemType = {
+  track: {
+    album: {
+      images: {
+        url: string;
+      }[];
+      release_date: string;
+    };
+    artists: {
+      name: string;
+    }[];
+    id: string;
+    name: string;
+    uri: string;
+  };
 };
 
 type InitalStateType = {
-  list: dispatchType[];
+  list: CurrentItemType[];
 };
 
 type SetListType = ReturnType<typeof addList> | ReturnType<typeof deleteList>;
@@ -37,7 +48,7 @@ export const setList = (
         list: [action.list, ...state.list],
       };
     case DELETELIST:
-      const res = state.list.filter((item) => item.id !== action.id);
+      const res = state.list.filter((item) => item.track.id !== action.id);
       return {
         ...state,
         list: res,

@@ -3,7 +3,7 @@ import { Section } from "./style";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducer/reducer";
-import { MyList } from "./MyList";
+import { MyList } from "./myList/MyList";
 import axios from "axios";
 
 export interface ListProps {
@@ -12,7 +12,7 @@ export interface ListProps {
   title: string;
 }
 
-type itemsType = {
+export type itemsType = {
   id: string;
   name: string;
 };
@@ -67,7 +67,7 @@ export function PlayList() {
           })}
         </select>
       )}
-      <MyList listID={selectedList.id} />
+      <MyList listID={selectedList.id} myList={myList} />
     </Section>
   );
 }

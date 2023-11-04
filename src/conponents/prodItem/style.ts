@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const ProdBox = styled.div`
+const ProdBox = styled.div<{ maxWidth: string }>`
   display: flex;
-  max-width: 200px;
+  max-width: ${(props) => props.maxWidth}px;
   width: 100%;
   flex-direction: column;
   cursor: pointer;
@@ -30,7 +30,7 @@ const ProdBox = styled.div`
 
 const ProdImg = styled.img`
   width: 100%;
-  height: 100%;
+  height: auto%;
 `;
 
 const ProdInfo = styled.div`

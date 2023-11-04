@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
-import { CurrentItemType } from "../../store/reducer/myList";
+import { CurrentItemType } from "../../../store/reducer/myList";
 import CurrentList from "./CurrentList";
 import { CurrentPlay } from "./CurrentPlay";
 import { useState } from "react";
-import { RootState } from "../../store/reducer/reducer";
+import { RootState } from "../../../store/reducer/reducer";
 import axios from "axios";
+import { ListBox } from "../style";
+import { itemsType } from "../PlayList";
 
 export type CurrentPlayProps = {
   imgURL: string;
@@ -14,7 +16,13 @@ export type CurrentPlayProps = {
   release_date: string;
 };
 
-export const MyList = ({ listID }: { listID: string }) => {
+export const MyList = ({
+  listID,
+  myList,
+}: {
+  listID: string;
+  myList: itemsType[];
+}) => {
   const token = useSelector((state: RootState) => state.setAccessToken.token);
   const [currentItem, setCurrentItem] = useState<CurrentPlayProps | null>(null);
   const storageList = useSelector((state: RootState) => state.setList.list);
@@ -50,21 +58,24 @@ export const MyList = ({ listID }: { listID: string }) => {
   }
 
   return (
-    <div className="listBox">
+    <ListBox>
       <CurrentPlay item={currentItem} />
       {listID === "PLAYLIST" ? (
         <CurrentList
-          listData={storageList}
+          listData={{ id: listID, data: storageList }}
           onChangeCurrentItem={onChangeCurrentItem}
-          isAddBtn={token?.name === "personal" ? "ture" : undefined}
+          myList={myList}
+          tokenType={token?.name === "personal" ? "personal" : undefined}
         />
       ) : (
         <CurrentList
-          listData={currentList}
+          listData={{ id: listID, data: currentList }}
           onChangeCurrentItem={onChangeCurrentItem}
+          myList={myList}
+          tokenType={token?.name === "personal" ? "personal" : undefined}
         />
       )}
-    </div>
+    </ListBox>
   );
 };
 

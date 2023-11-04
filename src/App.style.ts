@@ -1,11 +1,9 @@
 import { styled } from "styled-components";
 
 export const Main = styled.div<{ background: string }>`
-  display: flex;
   padding-left: 230px;
   background-image: url(${(props) => props.background});
   background-size: cover;
-  background-size: 400%;
   z-index: -10;
   animation: gradient 8s infinite;
   > section {

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const Section = styled.section`
-  width: 85vw;
-  padding: 50px 20px 0px 20px;
+  width: 100%;
+  padding: 50px 5%;
   @media screen and (max-width: 1024px) {
     margin: 0px auto;
   }
@@ -24,11 +24,13 @@ const Input = styled.input`
 const SearchList = styled.div`
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 3rem;
+  gap: 2rem;
   padding: 50px 0px;
+  max-width: 1400px;
 
   @media screen and (max-width: 1024px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    place-items: center;
   }
   @media screen and (max-width: 768px) {
     gap: 2rem;

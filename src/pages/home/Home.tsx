@@ -25,11 +25,11 @@ export default function Home() {
   return (
     <Section>
       {userName ? (
-        <h1>
-          Welcome, <span>{userName}</span> MUSIC SPACE!
-        </h1>
+        <h2>
+          Welcome, <span>{userName}</span> !
+        </h2>
       ) : (
-        <h1>Welcome, MUSIC SPACE!</h1>
+        <h2>Welcome, MUSIC SPACE!</h2>
       )}
       <div>
         <Category />

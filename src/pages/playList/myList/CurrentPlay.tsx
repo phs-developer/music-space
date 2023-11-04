@@ -1,6 +1,6 @@
-import SpotifyBtn from "../../conponents/SpotifyBtn";
-import { Bg, CurrentItem } from "./style";
-import white from "../../assets/white_bg.jpg";
+import SpotifyBtn from "../../../conponents/SpotifyBtn";
+import { Bg, CurrentItem } from "../style";
+import white from "../../../assets/white_bg.jpg";
 import { CurrentPlayProps } from "./MyList";
 
 export const CurrentPlay = ({ item }: { item: CurrentPlayProps | null }) => {

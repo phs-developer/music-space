@@ -6,33 +6,36 @@ type BtnType = {
 };
 
 const Section = styled.section`
-  width: 85vw;
-  padding: 50px 20px;
+  width: 100%;
+  padding: 50px 5%;
   z-index: 10;
+  height: 100vh;
   h2 {
     font-size: 2rem;
-    font-weight: 800;
-    padding: 10px;
-    margin-bottom: 0.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
   }
   select {
     border-radius: 10px;
     padding: 2px 5px;
-    margin-left: 10px;
     margin-bottom: 1rem;
   }
-  .listBox {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 2rem;
-    border-radius: 10px;
-  }
-
   @media screen and (max-width: 1024px) {
     width: 100vw;
-    padding: 50px 20px 0px 20px;
+    padding: 50px 20px;
+  }
+`;
+const ListBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2rem;
+  border-radius: 10px;
+  height: 90%;
+  .currentList {
+    position: relative;
+    height: 70%;
   }
 `;
 
@@ -80,7 +83,7 @@ const List = styled.ul`
   padding: 1.2rem;
   background-color: rgba(255, 255, 255, 0.2);
   overflow: auto;
-  height: 500px;
+  height: 100%;
   width: 750px;
   &::-webkit-scrollbar {
     width: 13px;
@@ -104,6 +107,7 @@ const List = styled.ul`
 const ListItem = styled.li`
   display: flex;
   margin-bottom: 1rem;
+  gap: 1rem;
   > div {
     display: flex;
     gap: 10px;
@@ -122,6 +126,9 @@ const ListItem = styled.li`
         font-size: 0.8rem;
       }
     }
+  }
+  @media screen and (max-width: 768px) {
+    font-size: ;
   }
 `;
 const Btn = styled.button<BtnType>`
@@ -152,4 +159,25 @@ const Bg = styled.div<{ background: string }>`
   opacity: 0.5;
   z-index: -1;
 `;
-export { Section, CurrentItem, List, ListItem, Btn, Bg };
+
+const UserPlaylist = styled.ul`
+  position: absolute;
+  top: 0px;
+  right: 150px;
+  background-color: rgba(255, 255, 255, 0.5);
+  max-height: 50%;
+  width: 200px;
+  border-radius: 10px;
+  padding: 5px;
+  li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 5px 10px;
+    &: hover {
+      font-weight: bold;
+    }
+  }
+`;
+
+export { Section, CurrentItem, List, ListItem, Btn, Bg, UserPlaylist, ListBox };

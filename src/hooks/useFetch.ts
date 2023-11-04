@@ -100,7 +100,7 @@ function useCategoryListFetch(listID: string) {
         const item = res.data.tracks.items;
         let list: ProdItemType[] = [];
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 6; i++) {
           list.push({
             imgURL: item[i].track.album.images[0].url,
             artistsName: item[i].track.artists.name,
@@ -108,6 +108,7 @@ function useCategoryListFetch(listID: string) {
             trackName: item[i].track.name,
             uri: item[i].track.uri,
             releaseDate: item[i].track.album.release_date,
+            maxWidth: "150",
           });
         }
         setList({ name: name, list: list });

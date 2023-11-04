@@ -23,7 +23,7 @@ export function Category() {
   function CategorySection({ category }: { category: ListType }) {
     return (
       <Container>
-        <h2>{category.name}</h2>
+        <h3>{category.name}</h3>
         <div>
           {category.list.map((item) => {
             return (
@@ -35,6 +35,7 @@ export function Category() {
                 id={item.id}
                 uri={item.uri}
                 releaseDate={item.releaseDate}
+                maxWidth={item.maxWidth}
               />
             );
           })}

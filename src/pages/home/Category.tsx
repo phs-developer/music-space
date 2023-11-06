@@ -1,6 +1,9 @@
 import ProdItem from "../../conponents/prodItem/ProdItem";
 import { Container } from "./style";
-import { ListType, useCategoryListFetch } from "../../hooks/useFetch";
+import {
+  ListType,
+  useCategoryListFetch,
+} from "../../hooks/useCategoryListFetch";
 
 export function Category() {
   /*    카테고리 api 코드

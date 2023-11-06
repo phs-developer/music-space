@@ -6,15 +6,13 @@ import { RootState } from "../../store/reducer/reducer";
 import { MyList } from "./myList/MyList";
 import axios from "axios";
 
-export interface ListProps {
-  id: string;
-  imgUrl: string;
-  title: string;
-}
-
 export type itemsType = {
   id: string;
   name: string;
+};
+
+export type Mylist2 = {
+  items: itemsType[];
 };
 
 // 트랙의 spotify ID가 있는 리스트를 props로 받아와야 함. (=전역 상태 관리, 장바구니 역할)
@@ -27,25 +25,25 @@ export function PlayList() {
 
   useEffect(() => {
     // user의 재생 목록 가져오기
+    const userList: itemsType[] = [myList[0]];
     token &&
       axios({
         method: "get",
-        url: `https://api.spotify.com/v1/me/playlists`,
+        url: "https://api.spotify.com/v1/me/playlists",
         headers: {
           Authorization: "Bearer " + token.number,
         },
       })
         .then((res) => {
-          const ids: Array<itemsType> = [myList[0]];
           res.data.items.forEach((item: itemsType) => {
-            ids.push({
+            userList.push({
               id: item.id,
               name: item.name,
             });
           });
-          setMyList(ids);
+          setMyList(userList);
         })
-        .catch((err) => console.log("재생 목록 받기 error " + err));
+        .catch((err) => console.log(err));
   }, [token]);
 
   const onSeleted = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -67,7 +65,7 @@ export function PlayList() {
           })}
         </select>
       )}
-      <MyList listID={selectedList.id} myList={myList} />
+      <MyList listID={selectedList.id} myList={myList} token={token} />
     </Section>
   );
 }

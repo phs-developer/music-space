@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { CurrentItemType, deleteList } from "../../../store/reducer/myList";
 import { itemsType } from "../PlayList";
 import { AddToTrack } from "./AddToTrack";
@@ -7,8 +7,8 @@ import { Btn, List, ListItem } from "../style";
 import play from "../../../assets/play.png";
 import x from "../../../assets/x.png";
 import add from "../../../assets/plus2.png";
-import { RootState } from "../../../store/reducer/reducer";
 import axios from "axios";
+import { tokenObj } from "../../../store/reducer/accessToken";
 
 type Props = {
   listData: {
@@ -17,21 +17,26 @@ type Props = {
   };
   onChangeCurrentItem: (track: CurrentItemType) => void;
   myList: itemsType[];
-  tokenType?: string | undefined;
+  token: tokenObj | null;
+  isAddBtn: boolean;
 };
 
 export default function CurrentList({
   listData,
   onChangeCurrentItem,
   myList,
-  tokenType,
+  token,
+  isAddBtn,
 }: Props) {
-  const token = useSelector((state: RootState) => state.setAccessToken.token);
   const [readyToAdd, setReadyToAdd] = useState({ active: false, uri: "" });
   const dispatch = useDispatch();
 
   function deleteItem(trackID: string, trackURI: string) {
-    if (tokenType === "personal") {
+    // 재생목록에서 track 제거
+    if (listData.id === "PLAYLIST") {
+      // store에서 track 제거
+      dispatch(deleteList(trackID));
+    } else {
       token &&
         axios({
           method: "delete",
@@ -48,8 +53,6 @@ export default function CurrentList({
             alert("재생 목록에서 삭제되었습니다.");
           })
           .catch((err) => console.log("헝목 삭제 실패" + err));
-    } else {
-      dispatch(deleteList(trackURI));
     }
   }
 
@@ -86,7 +89,7 @@ export default function CurrentList({
                 >
                   <img src={x} alt="삭제버튼" />
                 </Btn>
-                {tokenType === "addTrack" && (
+                {isAddBtn && (
                   <Btn
                     type="button"
                     color="lightgray"

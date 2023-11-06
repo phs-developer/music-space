@@ -13,6 +13,7 @@ import { LoginSuccess } from "./pages/login/LoginSuccess";
 import { MyPage } from "./pages/MyPage/MyPage";
 
 function App() {
+  // official 토큰 가져오기
   useGetToken();
 
   return (

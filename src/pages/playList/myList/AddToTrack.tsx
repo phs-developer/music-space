@@ -17,6 +17,7 @@ export const AddToTrack = ({
   const token = useSelector((state: RootState) => state.setAccessToken.token);
 
   function addTrack(listID: string) {
+    // 재생목록에 track 추가
     token &&
       axios({
         method: "post",

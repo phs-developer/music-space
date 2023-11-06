@@ -2,11 +2,12 @@ import { useSelector } from "react-redux";
 import { CurrentItemType } from "../../../store/reducer/myList";
 import CurrentList from "./CurrentList";
 import { CurrentPlay } from "./CurrentPlay";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RootState } from "../../../store/reducer/reducer";
 import axios from "axios";
 import { ListBox } from "../style";
 import { itemsType } from "../PlayList";
+import { tokenObj } from "../../../store/reducer/accessToken";
 
 export type CurrentPlayProps = {
   imgURL: string;
@@ -19,31 +20,35 @@ export type CurrentPlayProps = {
 export const MyList = ({
   listID,
   myList,
+  token,
 }: {
   listID: string;
   myList: itemsType[];
+  token: tokenObj | null;
 }) => {
-  const token = useSelector((state: RootState) => state.setAccessToken.token);
-  const [currentItem, setCurrentItem] = useState<CurrentPlayProps | null>(null);
   const storageList = useSelector((state: RootState) => state.setList.list);
+  const [currentItem, setCurrentItem] = useState<CurrentPlayProps | null>(null);
   const [currentList, setCurrentList] = useState<CurrentItemType[]>([]);
 
-  // 보여질 리스트가 PLAYLIST라면 redux store에서 호출하고,
-  // user 재생목록이라면 api로 호출해서 CurrentList에 데이터 전달.
-  if (listID !== "PLAYLIST") {
-    token &&
-      (async function () {
-        const res = await axios(
-          `https://api.spotify.com/v1/playlists/${listID}/tracks`,
-          {
-            headers: {
-              Authorization: "Bearer " + token.number,
-            },
-          }
-        );
-        setCurrentList(res.data.items);
-      })();
-  }
+  useEffect(() => {
+    // 보여질 리스트가 PLAYLIST라면 redux store에서 호출하고,
+    // user 재생목록이라면 api로 호출해서 CurrentList에 데이터 전달.
+    if (listID !== "PLAYLIST") {
+      // 선택된 재생목록의 track리스트 받기
+      token &&
+        (async function () {
+          const res = await axios(
+            `https://api.spotify.com/v1/playlists/${listID}/tracks`,
+            {
+              headers: {
+                Authorization: "Bearer " + token.number,
+              },
+            }
+          );
+          setCurrentList(res.data.items);
+        })();
+    }
+  }, [token, listID]);
 
   function onChangeCurrentItem(item: CurrentItemType) {
     // 재생버튼 click 시 CurrentItem에 데이터 전달 (play)
@@ -60,21 +65,16 @@ export const MyList = ({
   return (
     <ListBox>
       <CurrentPlay item={currentItem} />
-      {listID === "PLAYLIST" ? (
-        <CurrentList
-          listData={{ id: listID, data: storageList }}
-          onChangeCurrentItem={onChangeCurrentItem}
-          myList={myList}
-          tokenType={token?.name === "personal" ? "personal" : undefined}
-        />
-      ) : (
-        <CurrentList
-          listData={{ id: listID, data: currentList }}
-          onChangeCurrentItem={onChangeCurrentItem}
-          myList={myList}
-          tokenType={token?.name === "personal" ? "personal" : undefined}
-        />
-      )}
+      <CurrentList
+        listData={{
+          id: listID,
+          data: listID === "PLAYLIST" ? storageList : currentList,
+        }}
+        onChangeCurrentItem={onChangeCurrentItem}
+        myList={myList}
+        token={token}
+        isAddBtn={listID === "PLAYLIST" ? false : true}
+      />
     </ListBox>
   );
 };

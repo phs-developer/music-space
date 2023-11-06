@@ -2,18 +2,27 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/reducer/reducer";
-import styled from "styled-components";
 import baseImg from "../../assets/user.png";
 import { resetToken } from "../../store/reducer/accessToken";
 import { useNavigate } from "react-router-dom";
 import { ProfileInfo, Section, Ul } from "./style";
 
-type ProfileType = {
+export type ProfileType = {
   name: string;
   email: string;
   img: string;
   follower: string;
   id: string;
+};
+
+export type ProfileData = {
+  displayName: string;
+  email: string;
+  followers: {
+    total: string;
+  };
+  id: string;
+  images: string[];
 };
 
 export const MyPage = () => {

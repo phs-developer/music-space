@@ -26,13 +26,22 @@ export function useCategoryListFetch(listID: string) {
             },
           }
         );
-
+        const initialValue = {
+          imgURL: "이미지 경로",
+          artistsName: "가수명",
+          id: "아이디",
+          trackName: "노래명",
+          uri: "스포티파이 URI",
+          releaseDate: "출시일",
+          maxWidth: "150",
+        };
         const name: string = res.data.name;
         const item = res.data.tracks.items;
         let list: ProdItemType[] = [];
 
         for (let i = 0; i < 6; i++) {
           list.push({
+            ...initialValue,
             imgURL: item[i].track.album.images[0].url,
             artistsName: item[i].track.artists.name,
             id: item[i].track.id,

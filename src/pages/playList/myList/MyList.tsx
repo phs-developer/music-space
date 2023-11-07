@@ -73,7 +73,7 @@ export const MyList = ({
         onChangeCurrentItem={onChangeCurrentItem}
         myList={myList}
         token={token}
-        isAddBtn={listID === "PLAYLIST" ? false : true}
+        isAddBtn={listID === "PLAYLIST" ? true : false}
       />
     </ListBox>
   );

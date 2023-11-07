@@ -73,7 +73,6 @@ app.post("/loginSuccess", async function (req, res) {
       Authorization:
         "Basic " +
         new Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
-      // "Content-Type": "application/x-www-form-urlencoded",
     },
     params: {
       code: code,
@@ -91,12 +90,26 @@ app.post("/loginSuccess", async function (req, res) {
       return err;
     });
   res.send(result);
-  console.log(result);
-  // .then((response) => {
-  //   return response.data;
-  // })
-  // .catch((error) => {
-  //   return error;
-  // });
-  // res.send(result);
+});
+
+//------------------
+// 재생 목록 제목 변경
+app.post("/changeTitle", async function (req, res) {
+  const headers = req.body.headers;
+  const body = req.body.body;
+  const result = axios({
+    method: "put",
+    url: body.url,
+    headers: headers,
+    data: {
+      name: body.name,
+    },
+  })
+    .then(() => {
+      return { state: "ok" };
+    })
+    .catch((err) => {
+      return { state: err };
+    });
+  res.send(result);
 });

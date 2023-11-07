@@ -10,11 +10,6 @@ const Section = styled.section`
   padding: 50px 5%;
   z-index: 10;
   height: 100vh;
-  h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 2rem;
-  }
   select {
     border-radius: 10px;
     padding: 2px 5px;
@@ -25,6 +20,42 @@ const Section = styled.section`
     padding: 50px 20px;
   }
 `;
+
+const Title = styled.div`
+  position: relative;
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  img {
+    position: absolute;
+    top: -15px;
+    left: -20px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  form {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    input {
+      width: 180px;
+      height: 2.1rem;
+      border-radius: 5px;
+      border: 1px solid gray;
+      margin-right: 5px;
+      padding: 0px 5px;
+    }
+    button {
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+`;
+
 const ListBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -180,4 +211,14 @@ const UserPlaylist = styled.ul`
   }
 `;
 
-export { Section, CurrentItem, List, ListItem, Btn, Bg, UserPlaylist, ListBox };
+export {
+  Section,
+  CurrentItem,
+  List,
+  ListItem,
+  Btn,
+  Bg,
+  UserPlaylist,
+  ListBox,
+  Title,
+};

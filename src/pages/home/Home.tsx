@@ -7,7 +7,7 @@ import { Category } from "./Category";
 
 export default function Home() {
   const [userName, setUserName] = useState(null);
-  const token = useSelector((state: RootState) => state.setAccessToken.token);
+  const token = useSelector((state: RootState) => state.token.token);
 
   if (token) {
     // user 로그인 했을 경우 프로필 정보 받아오기

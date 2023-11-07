@@ -17,16 +17,16 @@ export type Mylist2 = {
 
 // 트랙의 spotify ID가 있는 리스트를 props로 받아와야 함. (=전역 상태 관리, 장바구니 역할)
 export function PlayList() {
-  const token = useSelector((state: RootState) => state.setAccessToken.token);
+  const token = useSelector((state: RootState) => state.token.token);
   const [myList, setMyList] = useState<itemsType[]>([
     { id: "PLAYLIST", name: "PLAYLIST" },
   ]);
   const [selectedList, setSelectedList] = useState<itemsType>(myList[0]);
 
   useEffect(() => {
-    // user의 재생 목록 가져오기
-    const userList: itemsType[] = [myList[0]];
-    token &&
+    // 로그인 했을 경우 user의 재생 목록 가져오기
+    if (token?.name === "personal") {
+      const userList: itemsType[] = [myList[0]];
       axios({
         method: "get",
         url: "https://api.spotify.com/v1/me/playlists",
@@ -44,6 +44,7 @@ export function PlayList() {
           setMyList(userList);
         })
         .catch((err) => console.log(err));
+    }
   }, [token]);
 
   const onSeleted = (event: ChangeEvent<HTMLSelectElement>) => {

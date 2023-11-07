@@ -1,14 +1,4 @@
-export const ADDLIST = "MYLIST/ADDLIST" as const;
-export const DELETELIST = "MYLIST/DELETELIST" as const;
-
-export const addList = (list: CurrentItemType) => ({
-  type: ADDLIST,
-  list,
-});
-export const deleteList = (id: string) => ({
-  type: DELETELIST,
-  id,
-});
+import { createSlice } from "@reduxjs/toolkit";
 
 export type CurrentItemType = {
   track: {
@@ -27,33 +17,49 @@ export type CurrentItemType = {
   };
 };
 
-type InitalStateType = {
+type initialStateType = {
   list: CurrentItemType[];
 };
 
-type SetListType = ReturnType<typeof addList> | ReturnType<typeof deleteList>;
-
-const initalState: InitalStateType = {
+const initialState: initialStateType = {
   list: [],
 };
 
-export const setList = (
-  state: InitalStateType = initalState,
-  action: SetListType
-) => {
-  switch (action.type) {
-    case ADDLIST:
-      return {
-        ...state,
-        list: [action.list, ...state.list],
-      };
-    case DELETELIST:
-      const res = state.list.filter((item) => item.track.id !== action.id);
-      return {
-        ...state,
-        list: res,
-      };
-    default:
-      return state;
-  }
-};
+const myListSlice = createSlice({
+  name: "myList",
+  initialState,
+  reducers: {
+    addList: (state, action) => {
+      state.list = [action.payload, ...state.list];
+    },
+    deleteList: (state, action) => {
+      const res = state.list.filter((item) => item.track.id !== action.payload);
+      state.list = res;
+    },
+  },
+});
+
+export default myListSlice;
+export const { addList, deleteList } = myListSlice.actions;
+// type SetListType = ReturnType<typeof addList> | ReturnType<typeof deleteList>;
+
+// export const setList = (
+//   state: initialStateType = initialState,
+//   action: SetListType
+// ) => {
+//   switch (action.type) {
+//     case ADDLIST:
+//       return {
+//         ...state,
+//         list: [action.list, ...state.list],
+//       };
+//     case DELETELIST:
+//       const res = state.list.filter((item) => item.track.id !== action.id);
+//       return {
+//         ...state,
+//         list: res,
+//       };
+//     default:
+//       return state;
+//   }
+// };

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducer/reducer";
 
 export default function Nav() {
-  const token = useSelector((state: RootState) => state.setAccessToken.token);
+  const token = useSelector((state: RootState) => state.token.token);
 
   return (
     <NavContainer>

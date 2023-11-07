@@ -13,7 +13,7 @@ export type ListType = {
 export function useCategoryListFetch(listID: string) {
   // home 카테고리 재생목록의 track 리스트 가져올 때 사용
   const [list, setList] = useState<ListType | null>(null);
-  const token = useSelector((state: RootState) => state.setAccessToken.token);
+  const token = useSelector((state: RootState) => state.token.token);
 
   useEffect(() => {
     token &&

@@ -28,7 +28,7 @@ export type ProfileData = {
 export const MyPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = useSelector((state: RootState) => state.setAccessToken.token);
+  const token = useSelector((state: RootState) => state.token.token);
   const [profile, setProfile] = useState<ProfileType>({
     name: "이름",
     email: "이메일",

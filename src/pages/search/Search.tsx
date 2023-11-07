@@ -23,7 +23,7 @@ interface listType {
 export default function Search() {
   const [value, setValue] = useState<string>("");
   const [list, setList] = useState<listType[]>([]);
-  const token = useSelector((state: RootState) => state.setAccessToken.token);
+  const token = useSelector((state: RootState) => state.token.token);
 
   function searchData(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

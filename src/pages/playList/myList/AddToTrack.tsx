@@ -14,7 +14,7 @@ export const AddToTrack = ({
   trackURI,
   closeMyList,
 }: AddToTrackType) => {
-  const token = useSelector((state: RootState) => state.setAccessToken.token);
+  const token = useSelector((state: RootState) => state.token.token);
 
   function addTrack(listID: string) {
     // 재생목록에 track 추가

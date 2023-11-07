@@ -26,7 +26,7 @@ export const MyList = ({
   myList: itemsType[];
   token: tokenObj | null;
 }) => {
-  const storageList = useSelector((state: RootState) => state.setList.list);
+  const storageList = useSelector((state: RootState) => state.myList.list);
   const [currentItem, setCurrentItem] = useState<CurrentPlayProps | null>(null);
   const [currentList, setCurrentList] = useState<CurrentItemType[]>([]);
 

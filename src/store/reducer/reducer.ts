@@ -1,14 +1,13 @@
-import { combineReducers } from "redux";
-import { counter } from "./counter";
-import { setList } from "./myList";
-import { setAccessToken } from "./accessToken";
+import tokenSlice from "./accessToken";
+import myListSlice from "./myList";
+import { configureStore } from "@reduxjs/toolkit";
 
-const rootReducer = combineReducers({
-  counter,
-  setList,
-  setAccessToken,
+const store = configureStore({
+  reducer: {
+    myList: myListSlice.reducer,
+    token: tokenSlice.reducer,
+  },
 });
 
-export default rootReducer;
-
-export type RootState = ReturnType<typeof rootReducer>;
+export default store;
+export type RootState = ReturnType<typeof store.getState>;

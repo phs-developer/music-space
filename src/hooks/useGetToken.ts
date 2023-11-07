@@ -5,7 +5,7 @@ import { RootState } from "../store/reducer/reducer";
 import { setToken, tokenObj } from "../store/reducer/accessToken";
 
 export default function useGetToken() {
-  const token = useSelector((state: RootState) => state.setAccessToken.token);
+  const token = useSelector((state: RootState) => state.token.token);
   const dispatch = useDispatch();
 
   async function getToken() {

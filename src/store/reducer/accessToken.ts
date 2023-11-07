@@ -19,7 +19,6 @@ const tokenSlice = createSlice({
   initialState,
   reducers: {
     setToken: (state, action) => {
-      console.log(state);
       state.token = action.payload;
     },
     resetToken: (state) => {
@@ -30,24 +29,3 @@ const tokenSlice = createSlice({
 
 export default tokenSlice;
 export const { setToken, resetToken } = tokenSlice.actions;
-
-// type ActionType = ReturnType<typeof setToken> | ReturnType<typeof resetToken>;
-// export const setAccessToken = (
-//   state: InitialStateType = initialState,
-//   action: ActionType
-// ) => {
-//   switch (action.type) {
-//     case SETTOKEN:
-//       return {
-//         ...state,
-//         token: action.token,
-//       };
-//     case RESETTOKEN:
-//       return {
-//         ...state,
-//         token: null,
-//       };
-//     default:
-//       return state;
-//   }
-// };

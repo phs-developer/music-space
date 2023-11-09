@@ -71,6 +71,7 @@ export const MyList = ({
           data: listID === "PLAYLIST" ? storageList : currentList,
         }}
         onChangeCurrentItem={onChangeCurrentItem}
+        setCurrentList={(updateList) => setCurrentList(updateList)}
         myList={myList}
         token={token}
         isAddBtn={

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { CurrentItemType } from "../../../store/reducer/myList";
 import CurrentList from "./CurrentList";
-import { CurrentPlay } from "./CurrentPlay";
+import CurrentPlay from "./CurrentPlay";
 import { useEffect, useState } from "react";
 import { RootState } from "../../../store/reducer/reducer";
 import axios from "axios";
@@ -73,7 +73,9 @@ export const MyList = ({
         onChangeCurrentItem={onChangeCurrentItem}
         myList={myList}
         token={token}
-        isAddBtn={listID === "PLAYLIST" ? true : false}
+        isAddBtn={
+          token?.name === "personal" && listID === "PLAYLIST" ? true : false
+        }
       />
     </ListBox>
   );

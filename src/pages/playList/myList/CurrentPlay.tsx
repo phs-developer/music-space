@@ -2,8 +2,10 @@ import SpotifyBtn from "../../../conponents/SpotifyBtn";
 import { Bg, CurrentItem } from "../style";
 import white from "../../../assets/white_bg.jpg";
 import { CurrentPlayProps } from "./MyList";
+import React from "react";
 
-export const CurrentPlay = ({ item }: { item: CurrentPlayProps | null }) => {
+const CurrentPlay = ({ item }: { item: CurrentPlayProps | null }) => {
+  console.log("바뀌니?");
   if (item === null) {
     // 초기 상태 기본값
     item = {
@@ -29,3 +31,4 @@ export const CurrentPlay = ({ item }: { item: CurrentPlayProps | null }) => {
     </>
   );
 };
+export default React.memo(CurrentPlay);

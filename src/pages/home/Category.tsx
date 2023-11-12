@@ -38,7 +38,7 @@ export function Category() {
                 id={item.id}
                 uri={item.uri}
                 releaseDate={item.releaseDate}
-                maxWidth={item.maxWidth}
+                maxwidth={item.maxwidth}
               />
             );
           })}

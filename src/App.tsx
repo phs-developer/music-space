@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Nav from "./conponents/nav/Nav";
 import GlobalStyles from "./styles/GlobalStyles";
@@ -21,16 +21,14 @@ function App() {
       <GlobalStyles />
       <Main background={bg}>
         <Nav />
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="search" element={<Search />} />
-            <Route path="playList" element={<PlayList />} />
-            <Route path="login" element={<Login />} />
-            <Route path="loginSuccess" element={<LoginSuccess />} />
-            <Route path="myPage" element={<MyPage />} />
-          </Routes>
-        </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="search" element={<Search />} />
+          <Route path="playList" element={<PlayList />} />
+          <Route path="login" element={<Login />} />
+          <Route path="loginSuccess" element={<LoginSuccess />} />
+          <Route path="myPage" element={<MyPage />} />
+        </Routes>
       </Main>
     </>
   );

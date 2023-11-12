@@ -69,7 +69,7 @@ export default function Search() {
               artistsName={e.artists[0].name}
               uri={e.uri}
               releaseDate={e.album.release_date}
-              maxWidth="180"
+              maxwidth="180"
             />
           );
         })}

@@ -33,7 +33,7 @@ export function useCategoryListFetch(listID: string) {
           trackName: "노래명",
           uri: "스포티파이 URI",
           releaseDate: "출시일",
-          maxWidth: "150",
+          maxwidth: "150",
         };
         const name: string = res.data.name;
         const item = res.data.tracks.items;
@@ -48,7 +48,7 @@ export function useCategoryListFetch(listID: string) {
             trackName: item[i].track.name,
             uri: item[i].track.uri,
             releaseDate: item[i].track.album.release_date,
-            maxWidth: "150",
+            maxwidth: "150",
           });
         }
         setList({ name: name, list: list });

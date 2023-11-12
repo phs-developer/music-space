@@ -10,7 +10,7 @@ export type ProdItemType = {
   trackName: string;
   uri: string;
   releaseDate: string;
-  maxWidth: string;
+  maxwidth: string;
 };
 
 // 매개변수의 id는 track_id !!
@@ -21,7 +21,7 @@ export default function ProdItem({
   id,
   uri,
   releaseDate,
-  maxWidth,
+  maxwidth,
 }: ProdItemType) {
   const dispatch = useDispatch();
   const addItem = (item: CurrentItemType) => {
@@ -49,7 +49,7 @@ export default function ProdItem({
   };
 
   return (
-    <ProdBox onClick={() => addItem(itemInfo)} maxWidth={maxWidth}>
+    <ProdBox onClick={() => addItem(itemInfo)} maxwidth={maxwidth}>
       <ProdImg src={imgURL} alt="prodImg" />
       <ProdInfo>
         <p className="trackName">{trackName}</p>

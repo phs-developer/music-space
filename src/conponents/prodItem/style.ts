@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const ProdBox = styled.div<{ maxWidth: string }>`
+const ProdBox = styled.div<{ maxwidth: string }>`
   display: flex;
-  max-width: ${(props) => props.maxWidth}px;
+  max-width: ${(props) => props.maxwidth}px;
   width: 100%;
   flex-direction: column;
   cursor: pointer;

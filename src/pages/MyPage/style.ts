@@ -20,6 +20,7 @@ const ProfileInfo = styled.div`
   min-width: 300px;
   padding: 2rem;
   margin-bottom: 2rem;
+  gap: 1rem;
   .imgWrap {
     > img {
       border-radius: 50%;
@@ -31,6 +32,9 @@ const ProfileInfo = styled.div`
   }
   .infoWrap {
     min-width: 50%;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
   }
 `;
 

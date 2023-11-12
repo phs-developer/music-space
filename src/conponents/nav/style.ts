@@ -23,6 +23,10 @@ const NavContainer = styled.nav`
   @media screen and (max-width: 768px) {
     gap: 1.5rem;
   }
+  @media screen and (max-width: 500px) {
+    justify-content: space-between;
+    gap: 0px;
+  }
 `;
 
 const Logo = styled.h1`
@@ -33,6 +37,9 @@ const Logo = styled.h1`
   @media screen and (max-width: 1024px) {
     margin: 0px;
     font-size: 1rem;
+  }
+  @media screen and (max-width: 500px) {
+    display: none;
   }
 `;
 

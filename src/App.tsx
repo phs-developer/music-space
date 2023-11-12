@@ -20,6 +20,7 @@ function App() {
     <>
       <GlobalStyles />
       <Main background={bg}>
+        <div className="bg" />
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />

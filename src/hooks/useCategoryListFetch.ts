@@ -43,7 +43,7 @@ export function useCategoryListFetch(listID: string) {
           list.push({
             ...initialValue,
             imgURL: item[i].track.album.images[0].url,
-            artistsName: item[i].track.artists.name,
+            artistsName: item[i].track.artists[0].name,
             id: item[i].track.id,
             trackName: item[i].track.name,
             uri: item[i].track.uri,

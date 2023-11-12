@@ -5,7 +5,6 @@ import { CurrentPlayProps } from "./MyList";
 import React from "react";
 
 const CurrentPlay = ({ item }: { item: CurrentPlayProps | null }) => {
-  console.log("바뀌니?");
   if (item === null) {
     // 초기 상태 기본값
     item = {
@@ -18,7 +17,7 @@ const CurrentPlay = ({ item }: { item: CurrentPlayProps | null }) => {
   }
   return (
     <>
-      <Bg background={item.imgURL} />
+      <Bg background={item.imgURL === white ? undefined : item.imgURL} />
       <CurrentItem>
         <img src={item.imgURL} alt="이미지" />
         <div>

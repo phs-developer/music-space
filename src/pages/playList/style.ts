@@ -38,18 +38,18 @@ const Title = styled.div`
   }
   form {
     position: absolute;
-    top: 0px;
+    top: -5px;
     left: 0px;
     input {
       width: 180px;
-      height: 2.1rem;
+      height: 2.2rem;
       border-radius: 5px;
       border: 1px solid gray;
       margin-right: 5px;
       padding: 0px 5px;
     }
     button {
-      &:hover {
+      &:active {
         font-weight: bold;
       }
     }
@@ -73,7 +73,7 @@ const ListBox = styled.div`
   }
   .currentList {
     position: relative;
-    height: 70%;
+    height: 65%;
     width: 750px;
     @media screen and (max-width: 1024px) {
       width: 100%;
@@ -91,12 +91,13 @@ const CurrentItem = styled.div`
     width: 200px;
     height: 200px;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;
+    margin-bottom: 5%;
   }
   > div {
     display: flex;
     flex-direction: column;
     width: 600px;
+    margin-bottom: 5%;
   }
   span {
     margin: 0px 0px 0.5rem 5px;
@@ -117,6 +118,22 @@ const CurrentItem = styled.div`
   }
   @media screen and (max-width: 1024px) {
     width: 100%;
+  }
+  @media screen and (max-width: 500px) {
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    span {
+      font-size: 1rem;
+    }
+    span:nth-of-type(3) {
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+    a {
+      font-size: 0.8rem;
+    }
   }
 `;
 
@@ -190,13 +207,13 @@ const Btn = styled.button<BtnType>`
   }
 `;
 
-const Bg = styled.div<{ background: string }>`
+const Bg = styled.div<{ background: string | undefined }>`
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0px;
   left: 0px;
-  background-image: url(${(props) => props.background});
+  background-image: url(${(props) => props.background && props.background});
   background-size: cover;
   -webkit-filter: blur(20px);
   opacity: 0.5;
@@ -207,8 +224,8 @@ const UserPlaylist = styled.ul`
   position: absolute;
   top: 0px;
   right: 150px;
-  background-color: rgba(255, 255, 255, 0.5);
-  max-height: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  max-height: 70%;
   width: 200px;
   border-radius: 10px;
   padding: 5px;

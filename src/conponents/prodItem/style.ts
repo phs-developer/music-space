@@ -7,23 +7,19 @@ const ProdBox = styled.div<{ maxwidth: string }>`
   flex-direction: column;
   cursor: pointer;
   position: relative;
-  &: hover {
-    > .hoverAction {
-      display: flex;
-    }
-    > img {
-      filter: blur(1px);
-    }
-  }
   .playlist {
     max-width: 100px;
     max-height: 100px;
   }
   &: active {
     .hoverAction {
+      display: flex;
       img {
         transform: scale(1.3);
       }
+    }
+    > img {
+      filter: blur(1px);
     }
   }
 `;

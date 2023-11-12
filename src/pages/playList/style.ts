@@ -54,19 +54,30 @@ const Title = styled.div`
       }
     }
   }
+  @media screen and (max-width: 1024px) {
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    img {
+      top: -25px;
+      left: 0px;
+    }
+  }
 `;
 
 const ListBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  row-gap: 2rem;
-  border-radius: 10px;
   height: 90%;
+  > div {
+    margin: 0px auto;
+  }
   .currentList {
     position: relative;
     height: 70%;
+    width: 750px;
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
   }
 `;
 
@@ -80,6 +91,7 @@ const CurrentItem = styled.div`
     width: 200px;
     height: 200px;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
   }
   > div {
     display: flex;
@@ -200,6 +212,7 @@ const UserPlaylist = styled.ul`
   width: 200px;
   border-radius: 10px;
   padding: 5px;
+  overflow: auto;
   li {
     overflow: hidden;
     text-overflow: ellipsis;

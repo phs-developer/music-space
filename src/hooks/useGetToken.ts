@@ -9,7 +9,9 @@ export default function useGetToken() {
   const dispatch = useDispatch();
 
   async function getToken() {
-    const res = await axios.get("http://localhost:8080");
+    const res = await axios.get(
+      "https://music-space-spotify-cb3294763381.herokuapp.com"
+    );
     const token: tokenObj = {
       number: res.data.access_token,
       name: "official",

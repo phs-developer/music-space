@@ -19,7 +19,7 @@ export function LoginSuccess() {
     (async function () {
       const res = await axios({
         method: "post",
-        url: "http://localhost:8080/loginSuccess",
+        url: "https://music-space-spotify-cb3294763381.herokuapp.com/loginSuccess",
         data: {
           headers: {
             "Content-Type": "application/json",

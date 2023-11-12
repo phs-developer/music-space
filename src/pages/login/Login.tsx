@@ -4,7 +4,9 @@ import { LoginForm, LoginButn } from "./style";
 export default function Login() {
   async function login() {
     // 스포티파이 연동 동의 페이지로 이동
-    const res = await axios.get("http://localhost:8080/login");
+    const res = await axios.get(
+      "https://music-space-spotify-cb3294763381.herokuapp.com/login"
+    );
     window.location.href = res.data;
   }
 

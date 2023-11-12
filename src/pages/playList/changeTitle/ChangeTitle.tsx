@@ -23,7 +23,7 @@ export const ChangeTitle = ({
     e.preventDefault();
     axios({
       method: "post",
-      url: "http://localhost:8080/changeTitle",
+      url: "https://music-space-spotify-cb3294763381.herokuapp.com/changeTitle",
       data: {
         headers: {
           Authorization: "Bearer " + token.number,

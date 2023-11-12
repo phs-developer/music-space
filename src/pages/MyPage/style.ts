@@ -42,6 +42,12 @@ const Ul = styled.ul`
       font-weight: bold;
       width: 200px;
     }
+    .logoutBtn {
+      cursor: pointer;
+      &:hover {
+        color: gray;
+      }
+    }
   }
 `;
 

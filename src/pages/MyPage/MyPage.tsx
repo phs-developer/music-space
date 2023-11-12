@@ -7,22 +7,12 @@ import { resetToken } from "../../store/reducer/accessToken";
 import { useNavigate } from "react-router-dom";
 import { ProfileInfo, Section, Ul } from "./style";
 
-export type ProfileType = {
+type ProfileType = {
   name: string;
   email: string;
   img: string;
   follower: string;
   id: string;
-};
-
-export type ProfileData = {
-  displayName: string;
-  email: string;
-  followers: {
-    total: string;
-  };
-  id: string;
-  images: string[];
 };
 
 export const MyPage = () => {
@@ -84,7 +74,9 @@ export const MyPage = () => {
             <span>팔로워 수</span> {profile.follower}
           </li>
           <li>
-            <span onClick={tokenReset}>로그아웃</span>
+            <span onClick={tokenReset} className="logoutBtn">
+              로그아웃
+            </span>
           </li>
         </Ul>
       </ProfileInfo>

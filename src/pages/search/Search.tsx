@@ -5,7 +5,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducer/reducer";
 
-interface listType {
+type listType = {
   album: {
     images: {
       url: string;
@@ -18,7 +18,7 @@ interface listType {
   id: string;
   name: string;
   uri: string;
-}
+};
 
 export default function Search() {
   const [value, setValue] = useState<string>("");

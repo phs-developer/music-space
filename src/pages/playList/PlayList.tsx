@@ -12,12 +12,8 @@ export type itemsType = {
   name: string;
 };
 
-export type Mylist2 = {
-  items: itemsType[];
-};
-
 // 트랙의 spotify ID가 있는 리스트를 props로 받아와야 함. (=전역 상태 관리, 장바구니 역할)
-export function PlayList() {
+export const PlayList = () => {
   const token = useSelector((state: RootState) => state.token.token);
   const onLogin = token?.name === "personal" ? true : false;
   const [myList, setMyList] = useState<itemsType[]>([
@@ -25,8 +21,8 @@ export function PlayList() {
   ]);
   const [selectedList, setSelectedList] = useState<itemsType>(myList[0]);
 
+  // 로그인 했을 경우 user의 재생 목록 가져오기
   useEffect(() => {
-    // 로그인 했을 경우 user의 재생 목록 가져오기
     if (token?.name === "personal") {
       const userList: itemsType[] = [myList[0]];
       axios({
@@ -88,4 +84,4 @@ export function PlayList() {
       <MyList listID={selectedList.id} myList={myList} token={token} />
     </Section>
   );
-}
+};

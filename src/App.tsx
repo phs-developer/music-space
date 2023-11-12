@@ -26,7 +26,7 @@ function App() {
           <Route path="search" element={<Search />} />
           <Route path="playList" element={<PlayList />} />
           <Route path="login" element={<Login />} />
-          <Route path="loginSeuccess" element={<LoginSuccess />} />
+          <Route path="loginSuccess" element={<LoginSuccess />} />
           <Route path="myPage" element={<MyPage />} />
         </Routes>
       </Main>
